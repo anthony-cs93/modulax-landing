@@ -108,7 +108,7 @@ header{
   pointer-events:none;
 }
 .hero-grid{display:grid;gap:44px;position:relative;z-index:1;}
-@media(min-width:1024px){.hero-grid{grid-template-columns:1.05fr 1fr;align-items:center;gap:56px;}}
+@media(min-width:1024px){.hero-grid{grid-template-columns:0.8fr 1.2fr;align-items:center;gap:56px;}}
 .hero h1{font-size:34px;margin-bottom:18px;}
 @media(min-width:640px){.hero h1{font-size:44px;}}
 @media(min-width:1024px){.hero h1{font-size:52px;}}
@@ -140,6 +140,7 @@ header{
 }
 .mock-screen .ph-title{font-family:var(--font-mono);font-size:12px;color:var(--blue-light);letter-spacing:.06em;}
 .mock-screen .ph-desc{font-size:13px;color:#95806A;max-width:320px;}
+@media(max-width:1023px){.mock-frame{width:calc(100% + 24px);margin:0 -12px;padding:8px;}}
 .float-card{
   position:absolute;bottom:-22px;left:-14px;
   background:var(--paper);color:var(--ink);border-radius:10px;
@@ -223,11 +224,9 @@ header{
   border-radius:14px;overflow:hidden;border:1px solid rgba(15,26,20,.08);background:var(--paper);
 }
 .gallery-shot{
-  aspect-ratio:16/10;background:linear-gradient(150deg,#EBE4D8,#DED4C4);
-  display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;
-  font-family:var(--font-mono);font-size:12px;color:#7A6B58;
+  border-radius:14px 14px 0 0;overflow:hidden;
 }
-.gallery-shot img{width:100%;height:100%;object-fit:cover;display:block;}
+.gallery-shot img{width:100%;height:auto;display:block;}
 .gallery-cap{padding:14px 16px;font-size:13.5px;color:var(--ink-soft);}
 
 /* ---------- comparativa ---------- */
@@ -262,6 +261,7 @@ header{
 .plan-name{font-family:var(--font-display);font-size:19px;margin-bottom:6px;}
 .plan-price{font-family:var(--font-mono);font-size:32px;font-weight:600;margin:14px 0 2px;}
 .plan-price span{font-size:14px;font-weight:400;color:var(--ink-soft);}
+.precio-old{display:none;font-size:14px;font-weight:400;text-decoration:line-through;color:var(--ink-soft);opacity:.6;}
 .plan-card.featured .plan-price span{color:#95806A;}
 .plan-desc{font-size:13px;color:var(--ink-soft);margin-bottom:20px;}
 .plan-card.featured .plan-desc{color:#B09B80;}
@@ -324,8 +324,8 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
   <nav class="nav">
     <a href="#" class="logo"><img src="public/logo/logo-dark.svg" alt="Modulax"></a>
     <div class="nav-links">
+      <a href="#galeria">Cómo funciona</a>
       <a href="#caracteristicas">Características</a>
-      <a href="#como-funciona">Cómo funciona</a>
       <a href="#planes">Planes</a>
       <a href="#faq">Preguntas</a>
     </div>
@@ -339,14 +339,14 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">Para carpinteros y fabricantes de melamina</p>
+      <p class="eyebrow">Diseñado para fabricantes independientes y negocios de mobiliario en melamina</p>
       <h1>Cotiza al milímetro. <span class="accent">Gana</span> lo que mereces.</h1>
       <p class="sub">Cotizador Modulax calcula materiales, herrajes, mano de obra y tu margen real — módulo por módulo — y entrega un PDF profesional con tu marca en minutos, no en horas.</p>
       <div class="hero-ctas">
-        <a href="#planes" class="btn btn-primary">Probar gratis ahora →</a>
-        <a href="#como-funciona" class="btn btn-outline">Ver cómo funciona</a>
+        <a href="https://cotizador-modulax.vercel.app/login" class="btn btn-primary">Probar gratis ahora →</a>
+        <a href="#galeria" class="btn btn-outline">Ver cómo funciona</a>
       </div>
-      <p class="hero-micro">Sin tarjeta · <strong>3 cotizaciones gratis</strong> con el plan Demo</p>
+      <p class="hero-micro">Sin tarjeta · <strong>exporta cotizaciones de forma gratuita</strong> con el plan Demo</p>
     </div>
 
     <div class="mock-frame">
@@ -358,8 +358,11 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
       </div>
       <div class="float-card">
         <div class="row"><span>Materiales</span><span>S/ 1,860</span></div>
-        <div class="row"><span>Mano de obra</span><span>S/ 670</span></div>
-        <div class="row total"><span>PRECIO DE VENTA</span><span class="val">S/ 2,530</span></div>
+        <div class="row"><span>Accesorios</span><span>S/ 230</span></div>
+        <div class="row"><span>Mano de obra</span><span>S/ 350</span></div>
+        <div class="row total"><span>Costo total</span><span>S/ 2,440</span></div>
+        <div class="row"><span>Margen de ganancia</span><span>S/ 1,200</span></div>
+        <div class="row total"><span>PRECIO DE VENTA</span><span class="val">S/ 3,640</span></div>
       </div>
     </div>
   </div>
@@ -368,8 +371,8 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
 <!-- ============ 2. PROBLEMA ============ -->
 <section class="section" id="problema">
   <div class="wrap">
-    <p class="eyebrow">El costo de cotizar a ojo</p>
-    <h2 class="headline">Cotizar mal te está costando plata todos los meses</h2>
+    <p class="eyebrow"><strong>El costo de cotizar a ojo</strong></p>
+    <h2 class="headline">Cotizar mal te está costando dinero todos los meses</h2>
     <p class="lede">Si todavía cotizas a mano, en Word o en una hoja de cálculo armada hace años, no eres el único — pero sí eres el que más está perdiendo.</p>
 
     <div class="pain-grid">
@@ -391,7 +394,7 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
       </div>
       <div class="pain-item">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>
-        <p><strong>Precios de materiales desactualizados</strong> que te hacen perder plata sin que lo notes.</p>
+        <p><strong>Precios de materiales desactualizados</strong> que te hacen perder dinero sin que lo notes.</p>
       </div>
       <div class="pain-item">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3v18h18M7 15l4-4 3 3 5-6"/></svg>
@@ -400,7 +403,7 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
     </div>
 
     <div class="consequence-box">
-      <p>Cada hora que pasas recalculando tableros y herrajes es una hora que no estás en el taller ni cerrando nuevos clientes. Y cada error de cálculo se descuenta directo de tu ganancia, sin que te des cuenta hasta que ya es tarde.</p>
+      <p>Cada hora que pasas recalculando tableros y herrajes es una hora que no estás en el taller ni cerrando nuevos clientes. Y cada error de cálculo se descuenta directo de tu ganancia.</p>
     </div>
   </div>
 </section>
@@ -409,7 +412,7 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
 <section class="section" style="background:var(--cream-2)" id="solucion">
   <div class="wrap sol-wrap">
     <div>
-      <p class="eyebrow">La solución</p>
+      <p class="eyebrow"><strong>La solución</strong></p>
       <h2 class="headline">Una app que piensa como carpintero y calcula como experto</h2>
       <p class="lede" style="margin-bottom:20px;">Cotizador Modulax convierte las medidas de tu proyecto en una cotización profesional en minutos. Configuras cada mueble con las mismas variables que usas en el taller — acabados, RH, correderas, bisagras, tiradores — y la app calcula materiales, accesorios, mano de obra, gastos y tu margen de ganancia automáticamente.</p>
       <p class="lede"><strong>Tú solo configura los módulos. La app se encarga de los números.</strong></p>
@@ -426,10 +429,54 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
   </div>
 </section>
 
-<!-- ============ 4. CARACTERÍSTICAS ============ -->
+<!-- ============ 4. GALERÍA (movida) ============ -->
+<section class="section" style="background:var(--cream-1)" id="galeria">
+  <div class="wrap">
+    <p class="eyebrow"><strong>Así se ve por dentro</strong></p>
+    <h2 class="headline">Un sistema completo y ordenado para cotizar en minutos</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-shot"><img src="public/img/gallery/modulos.webp" alt="Módulos configurados en la app"></div>
+        <div class="gallery-cap">Cada módulo se dibuja mientras lo configuras, para que confirmes medidas antes de cotizar.</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-shot"><img src="public/img/gallery/gastos.webp" alt="Desglose de gastos por sección"></div>
+        <div class="gallery-cap">Un documento profesional, con tu marca, listo para enviar por WhatsApp.</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-shot"><img src="public/img/gallery/proyectos.webp" alt="Panel de resumen con desglose de costos"></div>
+        <div class="gallery-cap">Ve el costo y el precio de venta actualizarse en tiempo real, sección por sección.</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-shot"><img src="public/img/gallery/configuracion.webp" alt="Vista de configuración de la app"></div>
+        <div class="gallery-cap">Sugerencia: un video corto (10-15s) mostrando el flujo completo desde el celular, en el taller.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. CÓMO FUNCIONA ============ -->
+<section class="section" style="background:var(--cream-2)" id="como-funciona">
+  <div class="wrap">
+    <p class="eyebrow"><strong>Cómo funciona</strong></p>
+    <h2 class="headline">De la medida a la venta, en 5 pasos</h2>
+    <!-- ANIMACIÓN sugerida: scroll-reveal donde cada paso se ilumina a medida que el usuario baja -->
+    <div class="steps">
+      <div class="steps-row">
+        <div class="step"><div class="badge">1</div><div><h3>Ingresa las medidas</h3><p>Ancho, alto y profundidad de cada módulo, tablero o puerta.</p></div></div>
+        <div class="step"><div class="badge">2</div><div><h3>Elige materiales</h3><p>Acabados, herrajes, correderas, bisagras y accesorios.</p></div></div>
+        <div class="step"><div class="badge">3</div><div><h3>La app calcula todo</h3><p>Materiales, mano de obra, gastos, impuestos y ganancia, en tiempo real.</p></div></div>
+        <div class="step"><div class="badge">4</div><div><h3>Genera tu PDF</h3><p>Cotización profesional con tu marca, lista en segundos.</p></div></div>
+        <div class="step"><div class="badge">5</div><div><h3>Envía y cierra</h3><p>Comparte por WhatsApp o correo desde el celular o la PC.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. CARACTERÍSTICAS ============ -->
 <section class="section" id="caracteristicas">
   <div class="wrap">
-    <p class="eyebrow">Características</p>
+    <p class="eyebrow"><strong>Características</strong></p>
     <h2 class="headline">Todo lo que cotizas en tu taller, en un solo lugar</h2>
     <p class="lede">Nada de fórmulas genéricas: cada función está pensada para melamina, carpintería y mueblería a medida.</p>
 
@@ -478,10 +525,10 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
   </div>
 </section>
 
-<!-- ============ 5. BENEFICIOS ============ -->
+<!-- ============ 7. BENEFICIOS ============ -->
 <section class="section" style="background:var(--cream-2)" id="beneficios">
   <div class="wrap">
-    <p class="eyebrow">Resultados para tu negocio</p>
+    <p class="eyebrow"><strong>Resultados para tu negocio</strong></p>
     <h2 class="headline">Lo que cambia cuando cotizas bien</h2>
 
     <div class="ben-grid">
@@ -514,54 +561,11 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
   </div>
 </section>
 
-<!-- ============ 6. CÓMO FUNCIONA ============ -->
-<section class="section" id="como-funciona">
-  <div class="wrap">
-    <p class="eyebrow">Cómo funciona</p>
-    <h2 class="headline">De la medida a la venta, en 5 pasos</h2>
-    <!-- ANIMACIÓN sugerida: scroll-reveal donde cada paso se ilumina a medida que el usuario baja -->
-    <div class="steps">
-      <div class="steps-row">
-        <div class="step"><div class="badge">1</div><div><h3>Ingresa las medidas</h3><p>Ancho, alto y profundidad de cada módulo, tablero o puerta.</p></div></div>
-        <div class="step"><div class="badge">2</div><div><h3>Elige materiales</h3><p>Acabados, herrajes, correderas, bisagras y accesorios.</p></div></div>
-        <div class="step"><div class="badge">3</div><div><h3>La app calcula todo</h3><p>Materiales, mano de obra, gastos, impuestos y ganancia, en tiempo real.</p></div></div>
-        <div class="step"><div class="badge">4</div><div><h3>Genera tu PDF</h3><p>Cotización profesional con tu marca, lista en segundos.</p></div></div>
-        <div class="step"><div class="badge">5</div><div><h3>Envía y cierra</h3><p>Comparte por WhatsApp o correo desde el celular o la PC.</p></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 7. GALERÍA ============ -->
-<section class="section" style="background:var(--cream-2)" id="galeria">
-  <div class="wrap">
-    <p class="eyebrow">Así se ve por dentro</p>
-    <h2 class="headline">Tu taller, ordenado en una pantalla</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="public/img/gallery/configuracion-modulo.webp" alt="Configuración de módulo con diagrama SVG interactivo" class="gallery-shot" style="width:100%;height:100%;object-fit:cover;">
-        <div class="gallery-cap">Cada módulo se dibuja mientras lo configuras, para que confirmes medidas antes de cotizar.</div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-shot">[ CAPTURA · Cotización PDF terminada, con logo de empresa ]</div>
-        <div class="gallery-cap">Un documento profesional, con tu marca, listo para enviar por WhatsApp.</div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-shot">[ CAPTURA · Panel de resumen con desglose de costos por sección ]</div>
-        <div class="gallery-cap">Ve el costo y el precio de venta actualizarse en tiempo real, sección por sección.</div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-shot">[ CAPTURA / VIDEO · Vista mobile cotizando desde el celular ]</div>
-        <div class="gallery-cap">Sugerencia: un video corto (10-15s) mostrando el flujo completo desde el celular, en el taller.</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ============ 8. COMPARATIVA ============ -->
 <section class="section section-dark" id="comparativa">
   <div class="wrap">
-    <p class="eyebrow">La diferencia real</p>
+    <p class="eyebrow"><strong>La diferencia real</strong></p>
     <h2 class="headline">Método tradicional vs. Cotizador Modulax</h2>
     <div class="compare-wrap">
     <table class="compare-table">
@@ -580,7 +584,7 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
 <!-- ============ 9. PLANES ============ -->
 <section class="section" id="planes">
   <div class="wrap center" style="max-width:640px;">
-    <p class="eyebrow" style="justify-content:center;">Planes de suscripción</p>
+    <p class="eyebrow" style="justify-content:center;"><strong>Planes de suscripción</strong></p>
     <h2 class="headline">Un plan para cada tamaño de taller</h2>
     <p class="lede center">Empieza gratis con el plan Demo y sube de plan cuando tu negocio lo necesite.</p>
   </div>
@@ -604,14 +608,14 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
           <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>3 PDF al mes</li>
           <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>1 proyecto guardado</li>
         </ul>
-        <a href="#" class="btn btn-ghost-dark" style="width:100%;">Empezar gratis</a>
+        <a href="https://cotizador-modulax.vercel.app/login" class="btn btn-ghost-dark" style="width:100%;">Empezar gratis</a>
       </div>
 
       <!-- PRO (destacado) -->
       <div class="plan-card featured">
         <span class="plan-tag">Recomendado</span>
         <div class="plan-name">Pro</div>
-        <div class="plan-price"><span class="precio-monto" data-mensual="S/ 19.90" data-anual="S/ 189.90">S/ 19.90</span><span class="precio-periodo"> / mes</span></div>
+        <div class="plan-price"><span class="precio-old">S/ 19.90</span><span class="precio-monto" data-mensual="19.90" data-anual="189.90">S/ 19.90</span><span class="precio-periodo"> / mes</span></div>
         <p class="plan-desc">Para talleres que cotizan todos los días y quieren crecer.</p>
         <ul class="plan-feats">
           <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Módulos, tableros, paneles y puertas ilimitados</li>
@@ -620,13 +624,13 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
           <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Todos los accesorios y adicionales</li>
           <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Atajos de teclado y configuración avanzada</li>
         </ul>
-        <a href="#" class="btn btn-primary" style="width:100%;">Quiero el plan Pro</a>
+        <a href="https://wa.me/51943613883?text=Hola%2C%20quiero%20empezar%20con%20el%20plan%20Pro%20del%20Cotizador%20Modulax.%20%C2%BFMe%20pueden%20ayudar%20con%20la%20activaci%C3%B3n%3F&utm_source=landing&utm_medium=pricing-pro" class="btn btn-primary" style="width:100%;">Quiero el plan Pro</a>
       </div>
 
       <!-- BÁSICO -->
       <div class="plan-card">
         <div class="plan-name">Básico</div>
-        <div class="plan-price"><span class="precio-monto" data-mensual="S/ 9.90" data-anual="S/ 89.90">S/ 9.90</span><span class="precio-periodo"> / mes</span></div>
+        <div class="plan-price"><span class="precio-old">S/ 9.90</span><span class="precio-monto" data-mensual="9.90" data-anual="89.90">S/ 9.90</span><span class="precio-periodo"> / mes</span></div>
         <p class="plan-desc">Para talleres pequeños que están ordenando su proceso.</p>
         <ul class="plan-feats">
           <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>5 módulos, 3 tableros, 2 paneles y puertas</li>
@@ -634,7 +638,7 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
           <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>5 proyectos guardados</li>
           <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Configuración de precios propios</li>
         </ul>
-        <a href="#" class="btn btn-ghost-dark" style="width:100%;">Elegir Básico</a>
+        <a href="https://wa.me/51943613883?text=Hola%2C%20quiero%20empezar%20con%20el%20plan%20B%C3%A1sico%20del%20Cotizador%20Modulax.%20%C2%BFMe%20pueden%20ayudar%20con%20la%20activaci%C3%B3n%3F&utm_source=landing&utm_medium=pricing-basico" class="btn btn-ghost-dark" style="width:100%;">Elegir Básico</a>
       </div>
     </div>
   </div>
@@ -643,7 +647,7 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
 <!-- ============ 10. TESTIMONIOS ============ -->
 <section class="section" style="background:var(--cream-2)">
   <div class="wrap">
-    <p class="eyebrow">Lo que dicen otros talleres</p>
+    <p class="eyebrow"><strong>Lo que dicen otros talleres</strong></p>
     <h2 class="headline">Carpinteros que ya cotizan distinto</h2>
     <div class="test-grid">
       <div class="test-card">
@@ -668,7 +672,7 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
 <!-- ============ 11. FAQ ============ -->
 <section class="section" id="faq">
   <div class="wrap center" style="max-width:760px;">
-    <p class="eyebrow" style="justify-content:center;">Preguntas frecuentes</p>
+    <p class="eyebrow" style="justify-content:center;"><strong>Preguntas frecuentes</strong></p>
     <h2 class="headline">Todo lo que quieres saber antes de empezar</h2>
   </div>
   <div class="faq-list">
@@ -709,7 +713,7 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
     <h2>Tu próxima cotización puede tomarte 10 minutos, no 3 horas</h2>
     <p>Empieza gratis con el plan Demo. Sin tarjeta, sin instalación, sin compromiso.</p>
     <div class="btns">
-      <a href="#planes" class="btn btn-primary">Probar gratis ahora →</a>
+      <a href="https://cotizador-modulax.vercel.app/login" class="btn btn-primary">Probar gratis ahora →</a>
       <a href="#planes" class="btn btn-outline">Ver planes y precios</a>
     </div>
     <div class="trust-row">
@@ -724,12 +728,12 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:13px;}
 
 <footer>
   <div class="wrap footer-wrap">
-    <div>© 2026 Cotizador Modulax. Hecho para fabricantes y empresas de mobiliario en melamina.</div>
+    <div>© 2026 Cotizador Modulax. Diseñado para fabricantes independientes y negocios de mobiliario en melamina.</div>
     <div>WhatsApp: +51 943 613 883</div>
   </div>
 </footer>
 
-<a class="wa-fab" href="#" aria-label="WhatsApp">
+<a class="wa-fab" href="https://wa.me/51943613883?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Cotizador%20Modulax.&utm_source=landing&utm_medium=fab" aria-label="WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5.05-1.33A10 10 0 1012 2zm0 18a8 8 0 01-4.08-1.12l-.29-.17-3 .79.8-2.93-.19-.3A8 8 0 1112 20zm4.4-5.6c-.24-.12-1.4-.7-1.62-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.18-.7-.62-1.18-1.4-1.32-1.64-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28z"/></svg>
 </a>
 
@@ -762,10 +766,17 @@ toggle.addEventListener('click', ()=>{
   lblM.style.opacity = anual ? .5 : 1;
   lblA.style.opacity = anual ? 1 : .5;
   document.querySelectorAll('.precio-monto').forEach(el=>{
-    el.textContent = anual ? el.dataset.anual : el.dataset.mensual;
+    const old = el.previousElementSibling;
+    if(anual){
+      old.style.display = 'block';
+      el.textContent = 'S/ ' + (parseFloat(el.dataset.anual) / 12).toFixed(2);
+    } else {
+      old.style.display = 'none';
+      el.textContent = 'S/ ' + el.dataset.mensual;
+    }
   });
   document.querySelectorAll('.precio-periodo').forEach(el=>{
-    el.textContent = anual ? ' / año' : ' / mes';
+    el.textContent = ' / mes';
   });
 });
 lblA.style.opacity = .5;
