@@ -236,17 +236,27 @@ header{
 .step h3{font-size:18px;margin-bottom:8px;}
 .step p{font-size:14.5px;color:var(--ink-soft);line-height:1.5;}
 
-/* ---------- galeria ---------- */
-.gallery-grid{display:grid;gap:16px;margin-top:40px;}
-@media(min-width:640px){.gallery-grid{grid-template-columns:1fr 1fr;}}
-.gallery-item{
-  border-radius:14px;overflow:hidden;border:1px solid rgba(15,26,20,.08);background:var(--paper);
+/* ---------- video demo ---------- */
+.demo-video{
+  margin-top:40px;
+  background:var(--paper);
+  border:1px solid rgba(15,26,20,.08);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 10px 30px -18px rgba(15,26,20,.18);
 }
-.gallery-shot{
-  border-radius:14px 14px 0 0;overflow:hidden;
+.demo-video video{
+  display:block;
+  width:100%;
+  height:auto;
+  background:#0f1a14;
 }
-.gallery-shot img{width:100%;height:auto;display:block;}
-.gallery-cap{padding:16px 18px;font-size:16.5px;color:var(--ink-soft);line-height:1.5;}
+.demo-cap{
+  padding:16px 18px;
+  font-size:16.5px;
+  color:var(--ink-soft);
+  line-height:1.5;
+}
 
 /* ---------- comparativa ---------- */
 .compare-table{width:100%;border-collapse:collapse;margin-top:40px;font-size:15px;}
@@ -403,10 +413,12 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:14px;}
 
 <!-- ============ 2. PROBLEMA ============ -->
 <section class="section" id="problema">
-  <div class="wrap">
-    <p class="eyebrow"><strong>El costo de cotizar a ojo</strong></p>
+  <div class="wrap center" style="max-width:780px;">
+    <p class="eyebrow" style="justify-content:center;"><strong>El costo de cotizar a ojo</strong></p>
     <h2 class="headline">Cotizar mal te está costando dinero todos los meses</h2>
-    <p class="lede">Si todavía cotizas a mano, en Word o en una hoja de cálculo armada hace años, no eres el único — pero sí eres el que más está perdiendo.</p>
+    <p class="lede center">Si todavía cotizas a mano, en Word o en una hoja de cálculo armada hace años, no eres el único — pero sí eres el que más está perdiendo.</p>
+  </div>
+  <div class="wrap">
 
     <div class="pain-grid">
       <div class="pain-item">
@@ -478,10 +490,12 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:14px;}
 
 <!-- ============ 4. CARACTERÍSTICAS ============ -->
 <section class="section" id="caracteristicas">
-  <div class="wrap">
-    <p class="eyebrow"><strong>Características</strong></p>
+  <div class="wrap center" style="max-width:780px;">
+    <p class="eyebrow" style="justify-content:center;"><strong>Características</strong></p>
     <h2 class="headline">Todo lo que cotizas en tu taller, en un solo lugar</h2>
-    <p class="lede">Nada de fórmulas genéricas: cada función está pensada para melamina, carpintería y mueblería a medida.</p>
+    <p class="lede center">Nada de fórmulas genéricas: cada función está pensada para melamina, carpintería y mueblería a medida.</p>
+  </div>
+  <div class="wrap">
 
     <div class="feat-grid">
       <div class="feat-card">
@@ -546,9 +560,11 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:14px;}
 
 <!-- ============ 5. CÓMO FUNCIONA ============ -->
 <section class="section" style="background:var(--cream-2)" id="como-funciona">
-  <div class="wrap">
-    <p class="eyebrow"><strong>Cómo funciona</strong></p>
+  <div class="wrap center" style="max-width:780px;">
+    <p class="eyebrow" style="justify-content:center;"><strong>Cómo funciona</strong></p>
     <h2 class="headline">De la medida a la venta, en 5 pasos</h2>
+  </div>
+  <div class="wrap">
     <!-- ANIMACIÓN sugerida: scroll-reveal donde cada paso se ilumina a medida que el usuario baja -->
     <div class="steps">
       <div class="steps-row">
@@ -562,37 +578,33 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:14px;}
   </div>
 </section>
 
-<!-- ============ 6. GALERÍA ============ -->
+<!-- ============ 6. VIDEO DEMO ============ -->
 <section class="section" id="galeria">
-  <div class="wrap">
-    <p class="eyebrow"><strong>Así se ve por dentro</strong></p>
+  <div class="wrap center" style="max-width:880px;">
+    <p class="eyebrow" style="justify-content:center;"><strong>Así se ve por dentro</strong></p>
     <h2 class="headline">Un sistema completo y ordenado para cotizar en minutos</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <div class="gallery-shot"><img src="public/img/gallery/modulos.webp" alt="Módulos configurados en la app"></div>
-        <div class="gallery-cap">Configura las dimensiones de cada módulo, sus acabados y accesorios.</div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-shot"><img src="public/img/gallery/gastos.webp" alt="Desglose de gastos por sección"></div>
-        <div class="gallery-cap">Configura los gastos del proyecto, con monto fijo o porcentual.</div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-shot"><img src="public/img/gallery/proyectos.webp" alt="Panel de resumen con desglose de costos"></div>
-        <div class="gallery-cap">Ten un control de tus proyectos para que puedas configurarlos donde estés.</div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-shot"><img src="public/img/gallery/configuracion.webp" alt="Vista de configuración de la app"></div>
-        <div class="gallery-cap">Personaliza tus cotizaciones con el nombre de tu empresa, logo y color corporativo.</div>
-      </div>
+    <div class="demo-video">
+      <video
+        controls
+        preload="metadata"
+        playsinline
+        muted
+        poster="public/img/gallery/modulos.webp">
+        <source src="public/video/Video demo.webm" type="video/webm">
+        Tu navegador no soporta video HTML5.
+      </video>
+      <p class="demo-cap">Mira cómo funciona el Cotizador Modulax: configura módulos, gastos y proyectos desde cualquier dispositivo, en menos de 10 minutos.</p>
     </div>
   </div>
 </section>
 
 <!-- ============ 7. BENEFICIOS ============ -->
 <section class="section" style="background:var(--cream-2)" id="beneficios">
-  <div class="wrap">
-    <p class="eyebrow"><strong>Resultados para tu negocio</strong></p>
+  <div class="wrap center" style="max-width:780px;">
+    <p class="eyebrow" style="justify-content:center;"><strong>Resultados para tu negocio</strong></p>
     <h2 class="headline">Lo que cambia cuando cotizas bien</h2>
+  </div>
+  <div class="wrap">
 
     <div class="ben-grid">
       <div class="ben-card">
@@ -627,9 +639,11 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:14px;}
 
 <!-- ============ 8. COMPARATIVA ============ -->
 <section class="section section-dark" id="comparativa">
-  <div class="wrap">
-    <p class="eyebrow"><strong>La diferencia real</strong></p>
+  <div class="wrap center" style="max-width:780px;">
+    <p class="eyebrow" style="justify-content:center;"><strong>La diferencia real</strong></p>
     <h2 class="headline">Método tradicional vs. Cotizador Modulax</h2>
+  </div>
+  <div class="wrap">
     <div class="compare-wrap">
     <table class="compare-table">
       <tr><th></th><th>Método tradicional</th><th>Cotizador Modulax</th></tr>
@@ -709,9 +723,11 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:14px;}
 
 <!-- ============ 10. TESTIMONIOS ============ -->
 <section class="section" style="background:var(--cream-2)">
-  <div class="wrap">
-    <p class="eyebrow"><strong>Lo que dicen otros talleres</strong></p>
+  <div class="wrap center" style="max-width:780px;">
+    <p class="eyebrow" style="justify-content:center;"><strong>Lo que dicen otros talleres</strong></p>
     <h2 class="headline">Carpinteros que ya cotizan distinto</h2>
+  </div>
+  <div class="wrap">
     <div class="test-grid">
       <div class="test-card">
         <div class="stars">★★★★★</div>
