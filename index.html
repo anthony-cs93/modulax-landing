@@ -671,7 +671,7 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:14px;}
       <span class="mono" id="lbl-mensual" style="font-weight:600;">Mensual</span>
       <button class="toggle-switch" id="planToggle" aria-label="Alternar mensual/anual"><span class="knob"></span></button>
       <span class="mono" id="lbl-anual">Anual</span>
-      <span class="save-badge">Ahorra 2 meses</span>
+      <span class="save-badge">Ahorra 25%</span>
     </div>
 
     <div class="plans-grid">
@@ -692,7 +692,7 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:14px;}
       <div class="plan-card featured">
         <span class="plan-tag">Recomendado</span>
         <div class="plan-name">Pro</div>
-        <div class="plan-price"><span class="precio-old">S/ 19.90</span><span class="precio-monto" data-mensual="19.90" data-anual="189.90">S/ 19.90</span><span class="precio-periodo"> / mes</span></div>
+        <div class="plan-price"><span class="precio-monto" data-mensual="15.90" data-anual="159.90">S/ 15.90</span><span class="precio-periodo"> / mes</span></div>
         <p class="plan-desc">Para talleres que cotizan todos los días y quieren crecer.</p>
         <ul class="plan-feats">
           <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Módulos, tableros, paneles y puertas ilimitados</li>
@@ -845,12 +845,12 @@ toggle.addEventListener('click', ()=>{
   lblM.style.opacity = anual ? .5 : 1;
   lblA.style.opacity = anual ? 1 : .5;
   document.querySelectorAll('.precio-monto').forEach(el=>{
-    const old = el.previousElementSibling;
+    const old = el.previousElementSibling && el.previousElementSibling.classList.contains('precio-old') ? el.previousElementSibling : null;
     if(anual){
-      old.style.display = 'block';
+      if(old) old.style.display = 'block';
       el.textContent = 'S/ ' + (parseFloat(el.dataset.anual) / 12).toFixed(2);
     } else {
-      old.style.display = 'none';
+      if(old) old.style.display = 'none';
       el.textContent = 'S/ ' + el.dataset.mensual;
     }
   });
