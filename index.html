@@ -905,10 +905,12 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
   <div class="wrap">
     <!-- Pestañas interactivas -->
     <div class="gallery-tabs reveal">
-      <button class="tab-btn active" data-tab="tab-modulos" id="btn-tab-modulos">1. Módulos & Melamina</button>
-      <button class="tab-btn" data-tab="tab-gastos" id="btn-tab-gastos">2. Gastos & Mano de Obra</button>
-      <button class="tab-btn" data-tab="tab-configuracion" id="btn-tab-config">3. Precios & Acabados</button>
-      <button class="tab-btn" data-tab="tab-proyectos" id="btn-tab-proyectos">4. Proyectos & PDF</button>
+      <button class="tab-btn active" data-tab="tab-modulos" id="btn-tab-modulos">1. Módulos</button>
+      <button class="tab-btn" data-tab="tab-adicionales" id="btn-tab-adicionales">2. Adicionales</button>
+      <button class="tab-btn" data-tab="tab-gastos" id="btn-tab-gastos">3. Gastos</button>
+      <button class="tab-btn" data-tab="tab-ganancia" id="btn-tab-ganancia">4. Ganancia</button>
+      <button class="tab-btn" data-tab="tab-precios" id="btn-tab-precios">5. Precios</button>
+      <button class="tab-btn" data-tab="tab-logo-pdf" id="btn-tab-logo-pdf">6. Logo y PDF</button>
     </div>
 
     <!-- Panel 1: Módulos -->
@@ -918,7 +920,7 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
       </div>
       <div class="tab-info-card">
         <h3>Constructor de Módulos Inteligente</h3>
-        <p>Configura módulos altos, bajos, esquineros o columnas. La aplicación dimensiona los tableros interiores, fondos, frentes y cajoneras automáticamente con tolerancias de taller.</p>
+        <p>Configura módulos altos, bajos, cajones y divisiones. La aplicación dimensiona los tableros interiores, fondos, frentes y cajoneras automáticamente con tolerancias de taller.</p>
         <div class="tab-feature-points">
           <div class="point-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
@@ -930,82 +932,132 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
           </div>
           <div class="point-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Tapacantos delgados y gruesos parametrizables por módulo.</span>
+            <span>Cálculo de mano de obra e instalación por cada sección.</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Panel 2: Gastos -->
+    <!-- Panel 2: Adicionales -->
+    <div class="tab-panel" id="tab-adicionales">
+      <div class="tab-visual-wrap">
+        <img src="public/img/gallery/adicionales.webp" alt="Adicionales y luz LED en Cotizador Modulax">
+      </div>
+      <div class="tab-info-card">
+        <h3>Accesorios e Iluminación LED</h3>
+        <p>Agrega accesorios y herrajes según la necesidad de cada proyecto. Ofrece al cliente extras que elevan el valor de su mueble y aumenta el ticket promedio de cada venta sin complicaciones.</p>
+        <div class="tab-feature-points">
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Accesorios diversos: condimentero, tacho extraíble, pasacables, sensores y más.</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Iluminación LED integrada directamente al costo del proyecto.</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Ítems opcionales que se reflejan al instante en la cotización.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 3: Gastos -->
     <div class="tab-panel" id="tab-gastos">
       <div class="tab-visual-wrap">
-        <img src="public/img/gallery/gastos.webp" alt="Gestión de gastos e imprevistos en Cotizador Modulax">
+        <img src="public/img/gallery/gastos.webp" alt="Gastos de flete, consumibles y depreciación de herramientas en Cotizador Modulax">
       </div>
       <div class="tab-info-card">
-        <h3>Control Total de Costos y Mano de Obra</h3>
-        <p>No dejes fuera ningún gasto imprevisto. Añade fletes, movilidad, consumibles (tornillos, tarugos, adhesivos) y define tu porcentaje de mano de obra con total transparencia.</p>
+        <h3>Gastos Reales del Taller</h3>
+        <p>Ingresas los gastos que muchos olvidan contar: flete, consumibles y la depreciación de tus herramientas. Cada cotización refleja el costo real de tu trabajo y tu rentabilidad queda protegida.</p>
         <div class="tab-feature-points">
           <div class="point-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Tarifas fijas o porcentuales de instalación y armado.</span>
+            <span>Flete y entregas calculados por proyecto.</span>
           </div>
           <div class="point-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Margen de seguridad para imprevistos y desperdicio de material.</span>
+            <span>Consumibles: tornillos, tarugos, adhesivos y más.</span>
           </div>
           <div class="point-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Visualización del costo bruto vs. tu utilidad neta.</span>
+            <span>Depreciación de herramientas para un costo real por trabajo.</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Panel 3: Configuración -->
-    <div class="tab-panel" id="tab-configuracion">
+    <!-- Panel 4: Ganancia -->
+    <div class="tab-panel" id="tab-ganancia">
       <div class="tab-visual-wrap">
-        <img src="public/img/gallery/configuracion.webp" alt="Panel de configuración de precios en Cotizador Modulax">
+        <img src="public/img/gallery/ganancia.webp" alt="Cálculo de ganancia, impuestos y descuentos en Cotizador Modulax">
       </div>
       <div class="tab-info-card">
-        <h3>Tu Lista de Precios Personalizada</h3>
-        <p>Ingresa los precios a los que compras en tu distribuidor local (Pelíkano, Vesto, Masisa, Novopan, etc.). La app utilizará tus valores exactos en cada presupuesto.</p>
+        <h3>Tu Ganancia Bajo Control</h3>
+        <p>Calcula la ganancia que pretendes ganar en cada proyecto. Configura tus impuestos, ajusta descuentos y aplica redondeo para presentar precios atractivos sin sacrificar tu utilidad.</p>
         <div class="tab-feature-points">
           <div class="point-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Precios de planchas, servicios de corte y pegado de canto.</span>
+            <span>Margen de ganancia objetivo configurable por proyecto.</span>
           </div>
           <div class="point-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Catálogo de herrajes configurables según marcas (Blum, Ducasse, etc.).</span>
+            <span>Impuestos calculados automáticamente según tu configuración.</span>
           </div>
           <div class="point-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Datos comerciales y logotipo de tu taller para el membrete del PDF.</span>
+            <span>Descuentos y redondeo ajustables para cerrar más ventas.</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Panel 4: Proyectos -->
-    <div class="tab-panel" id="tab-proyectos">
+    <!-- Panel 5: Precios -->
+    <div class="tab-panel" id="tab-precios">
       <div class="tab-visual-wrap">
-        <img src="public/img/gallery/proyectos.webp" alt="Listado de proyectos y exportación PDF en Cotizador Modulax">
+        <img src="public/img/gallery/precios.webp" alt="Personalización de precios de materiales, tableros, acabados y accesorios en Cotizador Modulax">
       </div>
       <div class="tab-info-card">
-        <h3>Biblioteca de Proyectos & Exportación</h3>
-        <p>Todos tus clientes y cotizaciones organizadas en un solo lugar. Puedes duplicar un proyecto de cocina existente para un cliente nuevo en 1 clic y exportar un PDF profesional.</p>
+        <h3>Tus precios 100% personalizados</h3>
+        <p>Personaliza todos los precios de tu negocio: materiales, tableros, accesorios y herrajes. La app utilizará siempre tus valores exactos en cada presupuesto, sin sorpresas.</p>
         <div class="tab-feature-points">
           <div class="point-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Descarga en PDF lista para imprimir o compartir por WhatsApp.</span>
+            <span>Precios actualizables de tableros y materiales.</span>
           </div>
           <div class="point-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Historial de presupuestos aceptados, pendientes y archivados.</span>
+            <span>Acabados y frentes con tarifas propias.</span>
           </div>
           <div class="point-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-            <span>Acceso sincronizado desde tu móvil, tablet o PC de taller.</span>
+            <span>Accesorios y herrajes con tu lista real de costos.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 6: Logo y PDF -->
+    <div class="tab-panel" id="tab-logo-pdf">
+      <div class="tab-visual-wrap">
+        <img src="public/img/gallery/logo.webp" alt="Configuración de la cotización PDF con logo personalizado en Cotizador Modulax">
+      </div>
+      <div class="tab-info-card">
+        <h3>Cotización con tu Marca</h3>
+        <p>Configura tu cotización y personalízala con el logo de tu negocio. Configura tu identificador para cotizaciones en serie. Genera un PDF profesional con la identidad de tu negocio que transmite confianza y te ayuda a cerrar la venta.</p>
+        <div class="tab-feature-points">
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Logo de tu negocio en el membrete del PDF.</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Formato ejecutivo listo para imprimir o enviar por WhatsApp.</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Imagen profesional que eleva tu tasa de cierre.</span>
           </div>
         </div>
       </div>
