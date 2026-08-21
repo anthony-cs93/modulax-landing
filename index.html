@@ -26,582 +26,1001 @@
 <meta name="twitter:image" content="https://modulax-landing.vercel.app/public/og-image.png">
 <style>
 :root{
-  --navy:#1A1410;
-  --navy-2:#2A2018;
-  --navy-3:#3D2E1F;
+  --navy:#17110C;
+  --navy-2:#241B13;
+  --navy-3:#35271B;
   --blue:#C4873B;
-  --blue-light:#D4B483;
-  --cream:#F5EDE0;
-  --cream-2:#E8DCC8;
+  --blue-light:#D8B684;
+  --cream:#F6EFE5;
+  --cream-2:#ECE1D0;
+  --cream-card:#FDFBF7;
   --paper:#FFFFFF;
   --amber:#C4873B;
-  --green:#2FAE6D;
-  --ink:#1A1410;
-  --ink-soft:#6B5A48;
-  --line:rgba(196,135,59,.35);
+  --amber-hover:#D99645;
+  --green:#2A9D61;
+  --green-light:#E6F6ED;
+  --red:#C04A37;
+  --red-light:#FDF0ED;
+  --ink:#17110C;
+  --ink-soft:#685848;
+  --ink-muted:#8F7F6E;
+  --line:rgba(196,135,59,.25);
+  --border-light:rgba(23,17,12,.08);
+  --border-dark:rgba(216,182,132,.2);
   --radius:14px;
   --maxw:1180px;
   --font-display:'Space Grotesk',sans-serif;
   --font-body:'Outfit',sans-serif;
   --font-mono:'JetBrains Mono',monospace;
 }
+
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:var(--font-body);color:var(--ink);background:var(--cream);line-height:1.5;-webkit-font-smoothing:antialiased;}
-img,svg{display:block;max-width:100%;}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg,video{display:block;max-width:100%;}
 a{color:inherit;text-decoration:none;}
 button{font-family:inherit;cursor:pointer;border:none;background:none;}
-h1,h2,h3{font-family:var(--font-display);letter-spacing:-0.01em;line-height:1.08;}
+h1,h2,h3,h4{font-family:var(--font-display);letter-spacing:-0.015em;line-height:1.1;}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
 .mono{font-family:var(--font-mono);}
 
-/* ---------- utility ---------- */
+/* ---------- SCROLL REVEAL ANIMATIONS ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .65s cubic-bezier(0.16, 1, 0.3, 1), transform .65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.96) translateY(20px);
+  transition: opacity .7s cubic-bezier(0.16, 1, 0.3, 1), transform .7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity .65s cubic-bezier(0.16, 1, 0.3, 1), transform .65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity .65s cubic-bezier(0.16, 1, 0.3, 1), transform .65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* ---------- UTILITIES ---------- */
 .eyebrow{
   font-family:var(--font-mono);
-  font-size:13px;
-  letter-spacing:.12em;
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:.14em;
   text-transform:uppercase;
   color:var(--blue);
-  display:flex;align-items:center;gap:8px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
   margin-bottom:14px;
 }
-.eyebrow::before{content:"";width:18px;height:1px;background:var(--blue);}
-.section{padding:72px 0;}
-@media(min-width:900px){.section{padding:110px 0;}}
+.eyebrow::before{content:"";width:18px;height:1.5px;background:var(--blue);display:inline-block;}
+.section{padding:76px 0;position:relative;}
+@media(min-width:900px){.section{padding:108px 0;}}
 .section-dark{background:var(--navy);color:var(--cream);}
 .section-dark .eyebrow{color:var(--blue-light);}
-h2.headline{font-size:30px;margin-bottom:16px;}
-@media(min-width:640px){h2.headline{font-size:38px;}}
-@media(min-width:1024px){h2.headline{font-size:44px;}}
-.lede{color:var(--ink-soft);font-size:18px;max-width:640px;line-height:1.6;}
-.section-dark .lede{color:#B09B80;}
+.section-dark .eyebrow::before{background:var(--blue-light);}
+h2.headline{font-size:32px;margin-bottom:16px;font-weight:700;}
+@media(min-width:640px){h2.headline{font-size:40px;}}
+@media(min-width:1024px){h2.headline{font-size:46px;}}
+.lede{color:var(--ink-soft);font-size:17.5px;max-width:640px;line-height:1.6;}
+.section-dark .lede{color:#C5B5A2;}
 .center{text-align:center;margin-left:auto;margin-right:auto;}
 
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:15px 26px;border-radius:10px;font-weight:600;font-size:15px;
-  transition:transform .15s ease, box-shadow .15s ease;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 26px;border-radius:10px;font-weight:600;font-size:15px;
+  transition:all .2s ease;
+  white-space:nowrap;
 }
 .btn:active{transform:scale(.98);}
-.btn-primary{background:var(--amber);color:var(--navy);box-shadow:0 8px 24px rgba(196,135,59,.35);}
-.btn-primary:hover{box-shadow:0 10px 28px rgba(196,135,59,.5);}
-.btn-outline{border:1.5px solid rgba(255,255,255,.25);color:var(--cream);}
-.btn-outline:hover{border-color:var(--blue-light);}
-.btn-ghost-dark{border:1.5px solid rgba(15,26,20,.15);color:var(--ink);}
-.btn-block-primary{background:var(--navy);color:var(--cream);}
-.btn-block-primary:hover{background:#0C0806;}
+.btn-primary{
+  background:var(--amber);
+  color:var(--navy);
+  box-shadow:0 8px 20px rgba(196,135,59,.3);
+}
+.btn-primary:hover{
+  background:var(--amber-hover);
+  box-shadow:0 12px 28px rgba(196,135,59,.45);
+  transform:translateY(-1px);
+}
+.btn-outline{
+  border:1.5px solid rgba(255,255,255,.28);
+  color:var(--cream);
+  background:rgba(255,255,255,.04);
+}
+.btn-outline:hover{
+  border-color:var(--blue-light);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+}
+.btn-ghost-dark{
+  border:1.5px solid var(--border-light);
+  color:var(--ink);
+  background:var(--paper);
+}
+.btn-ghost-dark:hover{
+  border-color:var(--amber);
+  color:var(--navy);
+  box-shadow:0 4px 12px rgba(23,17,12,.08);
+}
+.btn-block-primary{
+  background:var(--navy);
+  color:var(--cream);
+  box-shadow:0 4px 14px rgba(23,17,12,.15);
+}
+.btn-block-primary:hover{
+  background:#050302;
+  box-shadow:0 6px 18px rgba(23,17,12,.25);
+  transform:translateY(-1px);
+}
 
-/* ---------- header ---------- */
+/* ---------- HEADER ---------- */
 header{
   position:sticky;top:0;z-index:50;
-  background:rgba(244,241,234,.88);backdrop-filter:blur(10px);
-  border-bottom:1px solid rgba(15,26,20,.08);
+  background:rgba(246,239,229,.92);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(23,17,12,.08);
+  transition:all .3s ease;
 }
-.nav{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;max-width:var(--maxw);margin:0 auto;}
-@media(min-width:640px){.nav{padding:10px 22px;}}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;max-width:var(--maxw);margin:0 auto;
+}
+@media(min-width:640px){.nav{padding:12px 24px;}}
 .logo{display:flex;align-items:center;}
-.logo img{height:55px;width:auto;display:block;}
-@media(min-width:900px){.logo img{height:75px;}}
-.nav-links{display:none;gap:42px;font-size:18px;color:var(--ink-soft);}
+.logo img{height:54px;width:auto;display:block;transition:transform .2s;}
+.logo:hover img{transform:scale(1.02);}
+@media(min-width:900px){.logo img{height:68px;}}
+.nav-links{display:none;gap:36px;font-size:16.5px;color:var(--ink-soft);font-weight:500;}
 @media(min-width:900px){.nav-links{display:flex;}}
-.nav-links a:hover{color:var(--ink);}
-.nav .btn{padding:10px 16px;font-size:14px;}
-@media(min-width:900px){.nav .btn{padding:14px 26px;font-size:17px;}}
+.nav-links a{transition:color .18s;position:relative;padding:4px 0;}
+.nav-links a:hover{color:var(--navy);}
+.nav-links a::after{
+  content:"";position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--amber);transform:scaleX(0);transition:transform .2s ease;
+}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav .btn{padding:10px 18px;font-size:14.5px;}
+@media(min-width:900px){.nav .btn{padding:12px 22px;font-size:15px;}}
 
-/* ---------- HERO (plano técnico) ---------- */
+/* ---------- HERO SECTION ---------- */
 .hero{
   background:
-    radial-gradient(circle at 85% 0%, rgba(196,135,59,.18), transparent 55%),
+    radial-gradient(circle at 85% 15%, rgba(196,135,59,.22), transparent 50%),
+    radial-gradient(circle at 15% 90%, rgba(216,182,132,.08), transparent 40%),
     var(--navy);
   color:var(--cream);
   position:relative;
   overflow:hidden;
-  padding:56px 0 80px;
+  padding:54px 0 88px;
 }
-@media(min-width:900px){.hero{padding:88px 0 110px;}}
+@media(min-width:900px){.hero{padding:84px 0 110px;}}
 .hero::before{
   content:"";position:absolute;inset:0;
   background-image:
     linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-  background-size:34px 34px;
+  background-size:32px 32px;
   pointer-events:none;
 }
-.hero-grid{display:grid;gap:44px;position:relative;z-index:1;}
-@media(min-width:1024px){.hero-grid{grid-template-columns:0.8fr 1.2fr;align-items:center;gap:56px;}}
-.hero h1{font-size:34px;margin-bottom:18px;}
-@media(min-width:640px){.hero h1{font-size:44px;}}
+.hero-grid{display:grid;gap:44px;position:relative;z-index:2;}
+@media(min-width:1024px){.hero-grid{grid-template-columns:1.05fr 1.25fr;align-items:center;gap:56px;}}
+.hero h1{font-size:36px;margin-bottom:20px;font-weight:700;line-height:1.12;}
+@media(min-width:640px){.hero h1{font-size:46px;}}
 @media(min-width:1024px){.hero h1{font-size:52px;}}
-.hero h1 .accent{color:var(--amber);}
-.hero p.sub{color:#C4B49A;font-size:17px;max-width:520px;margin-bottom:30px;}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:16px;}
-.hero-micro{font-size:13px;color:#8B7555;font-family:var(--font-mono);}
-.hero-micro strong{color:var(--blue-light);}
+.hero h1 .accent{color:var(--amber);position:relative;display:inline-block;}
+.hero h1 .accent::after{
+  content:"";position:absolute;left:0;bottom:4px;width:100%;height:6px;
+  background:rgba(196,135,59,.3);z-index:-1;border-radius:2px;
+}
+.hero p.sub{color:#D2C4B2;font-size:17.5px;max-width:540px;margin-bottom:28px;line-height:1.6;}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:24px;}
+.hero-badges{
+  display:flex;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:12.5px;color:#B9A58E;
+}
+.hero-chip{
+  display:inline-flex;align-items:center;gap:6px;padding:5px 12px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(216,182,132,.18);
+  border-radius:20px;
+}
+.hero-chip .dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
 
-/* blueprint frame around mockup */
-.mock-frame{position:relative;padding:26px;}
-.mock-frame .corner{position:absolute;width:22px;height:22px;border:1.5px solid var(--blue-light);opacity:.7;}
+/* HERO APP MOCKUP CHROME */
+.mock-frame{
+  position:relative;
+  padding:22px;
+  perspective:1000px;
+}
+@media(max-width:1023px){.mock-frame{padding:6px;}}
+.mock-frame .corner{position:absolute;width:24px;height:24px;border:1.5px solid var(--blue-light);opacity:.75;}
 .mock-frame .corner.tl{top:0;left:0;border-right:none;border-bottom:none;}
 .mock-frame .corner.tr{top:0;right:0;border-left:none;border-bottom:none;}
 .mock-frame .corner.bl{bottom:0;left:0;border-right:none;border-top:none;}
 .mock-frame .corner.br{bottom:0;right:0;border-left:none;border-top:none;}
 .mock-tick{
-  position:absolute;top:-2px;left:26px;right:26px;height:14px;
+  position:absolute;top:-4px;left:24px;right:24px;height:14px;
   display:flex;justify-content:space-between;
-  font-family:var(--font-mono);font-size:10px;color:var(--blue-light);opacity:.6;
+  font-family:var(--font-mono);font-size:10px;color:var(--blue-light);opacity:.7;
 }
-.mock-screen{
-  aspect-ratio:16/11;border-radius:12px;
-  background:linear-gradient(160deg,#241A12,#150E0A);
-  border:1px solid rgba(212,180,131,.25);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  text-align:center;padding:24px;
-  box-shadow:0 30px 60px rgba(0,0,0,.4);
+
+.app-window{
+  border-radius:14px;
+  background:linear-gradient(170deg,#241B13,#17100A);
+  border:1px solid rgba(216,182,132,.25);
+  box-shadow:0 30px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.05);
+  overflow:hidden;
+  transition:transform .4s ease, box-shadow .4s ease;
 }
-.mock-screen .ph-title{font-family:var(--font-mono);font-size:12px;color:var(--blue-light);letter-spacing:.06em;}
-.mock-screen .ph-desc{font-size:13px;color:#95806A;max-width:320px;}
-@media(max-width:1023px){.mock-frame{width:calc(100% + 24px);margin:0 -12px;padding:8px;}}
+.mock-frame:hover .app-window{
+  transform:translateY(-4px);
+  box-shadow:0 36px 70px rgba(0,0,0,.6), 0 0 0 1px rgba(196,135,59,.3);
+}
+.window-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  background:#130E09;padding:10px 16px;border-bottom:1px solid rgba(216,182,132,.15);
+  font-family:var(--font-mono);font-size:11.5px;color:#A99884;
+}
+.window-dots{display:flex;gap:6px;}
+.window-dots span{width:10px;height:10px;border-radius:50%;}
+.window-dots .d-red{background:#E05A47;}
+.window-dots .d-yellow{background:#E5A93C;}
+.window-dots .d-green{background:#38B774;}
+.window-tag{
+  background:rgba(42,157,97,.15);color:var(--green);border:1px solid rgba(42,157,97,.3);
+  font-size:10.5px;padding:2px 8px;border-radius:12px;display:flex;align-items:center;gap:5px;
+}
+.window-tag .ping{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:.4;transform:scale(1.2);}
+}
+.app-screen-view{
+  position:relative;
+  aspect-ratio:16/10.5;
+  background:#0E0A07;
+  overflow:hidden;
+}
+.app-screen-view img{width:100%;height:100%;object-fit:cover;}
+
+/* Live summary floating badge */
 .float-card{
-  position:absolute;bottom:-22px;left:-14px;
-  background:var(--paper);color:var(--ink);border-radius:10px;
-  padding:14px 16px;box-shadow:0 16px 34px rgba(0,0,0,.28);
-  font-family:var(--font-mono);font-size:12px;width:260px;
+  position:absolute;bottom:-20px;left:-10px;z-index:10;
+  background:var(--paper);color:var(--ink);border-radius:12px;
+  padding:16px 18px;
+  box-shadow:0 20px 40px rgba(0,0,0,.35), 0 0 0 1px rgba(23,17,12,.08);
+  font-family:var(--font-mono);font-size:12px;width:320px;
+  animation:floatCard 4s ease-in-out infinite alternate;
 }
-@media(max-width:1023px){.float-card{position:static;margin-top:16px;width:100%;}}
-.float-card .row{display:flex;justify-content:space-between;padding:3px 0;color:var(--ink-soft);}
-.float-card .row.total{border-top:1px dashed #C8BAA5;margin-top:6px;padding-top:8px;color:var(--ink);font-weight:600;}
-.float-card .row.total .val{color:var(--green);}
-
-/* ---------- problema ---------- */
-.pain-grid{display:grid;gap:20px;margin-top:40px;}
-@media(min-width:640px){.pain-grid{grid-template-columns:1fr 1fr;}}
-.pain-item{
-  display:flex;gap:18px;background:var(--paper);border-radius:12px;padding:26px 28px;
-  border:1px solid rgba(15,26,20,.06);
-  transition:transform .18s ease, box-shadow .18s ease;
+@keyframes floatCard{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-6px);}
 }
-.pain-item:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(15,26,20,.08);}
-.pain-item .ic{flex:none;width:32px;height:32px;color:#C0533F;margin-top:2px;}
-.pain-body{display:flex;flex-direction:column;gap:4px;}
-.pain-item h4{font-family:var(--font-display);font-size:19px;font-weight:700;color:var(--ink);line-height:1.25;margin:0;}
-.pain-item p{font-size:15.5px;color:var(--ink-soft);line-height:1.5;margin:0;}
-
-/* ---------- solucion ---------- */
-.sol-wrap{display:grid;gap:40px;align-items:center;}
-@media(min-width:1024px){.sol-wrap{grid-template-columns:1fr 1fr;}}
-.sol-visual{
-  background:var(--paper);border-radius:16px;padding:24px;border:1px solid rgba(15,26,20,.08);
+@media(max-width:1023px){
+  .float-card{position:static;margin-top:16px;width:100%;animation:none;}
 }
-.sol-row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px dashed #D4C8B6;font-size:16px;}
-.sol-row:last-child{border-bottom:none;}
-.sol-row .dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex:none;}
-.sol-row .tag{margin-left:auto;font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);}
+.float-card .head{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;color:var(--blue);text-transform:uppercase;letter-spacing:.08em;
+  border-bottom:1px solid #EFEAE1;padding-bottom:6px;margin-bottom:8px;font-weight:600;
+}
+.float-card .row{display:flex;justify-content:space-between;padding:3.5px 0;color:var(--ink-soft);}
+.float-card .row.total{
+  border-top:1px dashed #D6CAB8;margin-top:6px;padding-top:8px;color:var(--ink);font-weight:600;font-size:13px;
+}
+.float-card .row.total .val{color:var(--green);font-size:14px;}
+.float-card .pill-saving{
+  margin-top:10px;background:var(--green-light);color:var(--green);
+  border-radius:6px;padding:6px 10px;font-size:11px;display:flex;align-items:center;justify-content:space-between;
+}
 
-/* ---------- features ---------- */
-.feat-grid{display:grid;gap:16px;margin-top:40px;}
-@media(min-width:640px){.feat-grid{grid-template-columns:1fr 1fr;}}
+/* ---------- STATS STRIP ---------- */
+.stats-strip{
+  background:var(--cream-2);
+  border-top:1px solid rgba(23,17,12,.06);
+  border-bottom:1px solid rgba(23,17,12,.06);
+  padding:32px 0;
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
+}
+@media(min-width:768px){.stats-grid{grid-template-columns:repeat(4,1fr);}}
+.stat-box{
+  text-align:center;padding:10px 14px;
+}
+.stat-box .num{
+  font-family:var(--font-display);font-size:34px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:6px;
+}
+.stat-box .num span{color:var(--amber);}
+.stat-box .lbl{
+  font-size:13.5px;color:var(--ink-soft);font-weight:500;
+}
+
+/* ---------- PROBLEMA vs SOLUCIÓN (REDISTRIBUCIÓN) ---------- */
+.vs-grid{
+  display:grid;gap:24px;margin-top:44px;
+}
+@media(min-width:960px){.vs-grid{grid-template-columns:1fr 1fr;}}
+.vs-card{
+  border-radius:18px;padding:32px 28px;
+  position:relative;
+  transition:all .25s ease;
+}
+.vs-card-bad{
+  background:var(--paper);
+  border:1.5px solid rgba(192,74,55,.2);
+  box-shadow:0 10px 28px rgba(192,74,55,.05);
+}
+.vs-card-good{
+  background:var(--navy);
+  color:var(--cream);
+  border:1.5px solid var(--amber);
+  box-shadow:0 18px 42px rgba(23,17,12,.2);
+}
+.vs-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);font-size:12px;font-weight:600;
+  padding:5px 12px;border-radius:20px;margin-bottom:18px;
+}
+.vs-card-bad .vs-badge{background:var(--red-light);color:var(--red);}
+.vs-card-good .vs-badge{background:rgba(196,135,59,.2);color:var(--blue-light);border:1px solid rgba(196,135,59,.4);}
+.vs-title{font-size:24px;font-weight:700;margin-bottom:12px;}
+.vs-desc{font-size:15px;color:var(--ink-soft);line-height:1.5;margin-bottom:24px;}
+.vs-card-good .vs-desc{color:#C8B9A6;}
+.vs-list{display:flex;flex-direction:column;gap:14px;}
+.vs-item{display:flex;gap:12px;align-items:flex-start;}
+.vs-item .ic-status{
+  width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px;
+}
+.vs-card-bad .ic-status{background:var(--red-light);color:var(--red);}
+.vs-card-good .ic-status{background:rgba(42,157,97,.2);color:var(--green);}
+.vs-item p{font-size:15px;line-height:1.45;}
+.vs-item p strong{display:block;margin-bottom:2px;font-size:15.5px;}
+
+/* ---------- GALERÍA DE MÓDULOS & TABS INTERACTIVAS ---------- */
+.gallery-tabs{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:32px 0 28px;
+}
+.tab-btn{
+  padding:10px 20px;border-radius:24px;background:var(--paper);border:1.5px solid var(--border-light);
+  font-family:var(--font-mono);font-size:13.5px;font-weight:600;color:var(--ink-soft);
+  transition:all .2s ease;
+}
+.tab-btn:hover{
+  border-color:var(--amber);color:var(--navy);transform:translateY(-1px);
+}
+.tab-btn.active{
+  background:var(--navy);color:var(--cream);border-color:var(--navy);
+  box-shadow:0 6px 18px rgba(23,17,12,.18);
+}
+.tab-panel{
+  display:none;
+  animation:fadePanel .35s ease;
+}
+.tab-panel.active{
+  display:grid;gap:28px;align-items:center;
+}
+@media(min-width:960px){.tab-panel.active{grid-template-columns:1.25fr 0.95fr;}}
+@keyframes fadePanel{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.tab-visual-wrap{
+  background:var(--navy);border-radius:16px;padding:12px;
+  border:1px solid rgba(216,182,132,.25);
+  box-shadow:0 20px 45px rgba(23,17,12,.12);
+  overflow:hidden;
+}
+.tab-visual-wrap img{
+  width:100%;height:auto;border-radius:10px;object-fit:cover;
+  transition:transform .4s ease;
+}
+.tab-visual-wrap:hover img{transform:scale(1.015);}
+.tab-info-card{
+  background:var(--paper);border-radius:16px;padding:30px 26px;border:1px solid var(--border-light);
+}
+.tab-info-card h3{font-size:22px;margin-bottom:12px;color:var(--navy);}
+.tab-info-card p{font-size:15.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:20px;}
+.tab-feature-points{display:flex;flex-direction:column;gap:12px;}
+.point-row{display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:500;}
+.point-row svg{color:var(--green);flex:none;}
+
+/* ---------- CARACTERÍSTICAS (BENTO GRID) ---------- */
+.feat-grid{display:grid;gap:18px;margin-top:40px;}
+@media(min-width:640px){.feat-grid{grid-template-columns:repeat(2,1fr);}}
 @media(min-width:1024px){.feat-grid{grid-template-columns:repeat(4,1fr);}}
 .feat-card{
-  background:var(--paper);border-radius:14px;padding:18px 16px;border:1px solid rgba(15,26,20,.06);
-  transition:transform .18s ease, box-shadow .18s ease;
+  background:var(--paper);border-radius:14px;padding:24px 22px;border:1px solid var(--border-light);
+  transition:all .25s ease;display:flex;flex-direction:column;
 }
-.feat-card:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(15,26,20,.08);}
-.feat-card .ic-box{width:40px;height:40px;border-radius:9px;background:#F0ECE2;color:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
-.feat-card h3{font-size:17px;margin-bottom:6px;}
-.feat-card p{font-size:14px;color:var(--ink-soft);line-height:1.45;}
-.feat-header{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-.feat-header .ic-box{margin-bottom:0;}
-.feat-header h3{margin-bottom:0;}
-@media(min-width:640px){
-  .feat-card{padding:26px 22px;}
-  .feat-card .ic-box{width:48px;height:48px;border-radius:11px;margin-bottom:14px;}
-  .feat-card h3{font-size:19px;margin-bottom:8px;}
-  .feat-card p{font-size:15px;line-height:1.5;}
-  .feat-header{gap:14px;margin-bottom:14px;}
-  .feat-header .ic-box{margin-bottom:0;}
-  .feat-header h3{margin-bottom:0;}
+.feat-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 36px rgba(23,17,12,.08);
+  border-color:rgba(196,135,59,.3);
 }
+.feat-header{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.feat-card .ic-box{
+  width:44px;height:44px;border-radius:10px;
+  background:#F5ECE0;color:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  flex:none;transition:all .2s;
+}
+.feat-card:hover .ic-box{background:var(--amber);color:var(--navy);}
+.feat-card h3{font-size:18px;font-weight:700;color:var(--navy);}
+.feat-card p{font-size:14.5px;color:var(--ink-soft);line-height:1.5;}
 
-/* ---------- beneficios ---------- */
+/* ---------- CÓMO FUNCIONA ---------- */
+.steps-container{margin-top:48px;position:relative;}
+.steps-timeline{
+  display:grid;gap:20px;
+}
+@media(min-width:960px){.steps-timeline{grid-template-columns:repeat(5,1fr);}}
+.step-item{
+  background:var(--paper);border-radius:14px;padding:24px 20px;border:1px solid var(--border-light);
+  position:relative;transition:all .25s ease;display:flex;flex-direction:column;gap:12px;
+}
+.step-item:hover{
+  transform:translateY(-4px);box-shadow:0 16px 30px rgba(23,17,12,.08);border-color:var(--amber);
+}
+.step-badge-num{
+  width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--cream);
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);
+  font-size:15px;font-weight:700;box-shadow:0 4px 10px rgba(23,17,12,.2);
+}
+.step-item h3{font-size:17.5px;font-weight:700;color:var(--navy);}
+.step-item p{font-size:14px;color:var(--ink-soft);line-height:1.5;}
+
+/* ---------- VIDEO DEMO ---------- */
+.demo-video{
+  margin-top:40px;
+  background:var(--navy);
+  border:1px solid rgba(216,182,132,.25);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 24px 55px rgba(23,17,12,.2);
+}
+.demo-video video{
+  display:block;width:100%;height:auto;background:#0E0A07;
+}
+.demo-cap{
+  padding:20px 24px;
+  font-size:16px;
+  color:#D2C4B2;
+  line-height:1.6;
+  border-top:1px solid rgba(216,182,132,.15);
+  display:flex;align-items:center;gap:12px;
+}
+.demo-cap svg{color:var(--amber);flex:none;}
+
+/* ---------- BENEFICIOS ---------- */
 .ben-grid{display:grid;gap:16px;margin-top:40px;}
 @media(min-width:640px){.ben-grid{grid-template-columns:repeat(2,1fr);}}
 @media(min-width:1024px){.ben-grid{grid-template-columns:repeat(5,1fr);}}
-.ben-card{background:var(--paper);border-radius:14px;padding:18px 16px;border:1px solid rgba(15,26,20,.06);transition:transform .18s ease, box-shadow .18s ease;}
-.ben-card:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(15,26,20,.08);}
-.ben-card .num{font-family:var(--font-mono);color:var(--blue);font-size:14px;margin-bottom:8px;}
-.ben-card h3{font-size:16px;margin-bottom:8px;}
-.ben-card p{font-size:13.5px;color:var(--ink-soft);line-height:1.45;}
-@media(min-width:640px){
-  .ben-card{padding:26px 20px;}
-  .ben-card .num{font-size:15px;margin-bottom:12px;}
-  .ben-card h3{font-size:18px;margin-bottom:10px;}
-  .ben-card p{font-size:14.5px;line-height:1.5;}
+.ben-card{
+  background:var(--paper);border-radius:14px;padding:26px 20px;border:1px solid var(--border-light);
+  transition:all .25s ease;display:flex;flex-direction:column;
 }
+.ben-card:hover{
+  transform:translateY(-4px);box-shadow:0 16px 32px rgba(23,17,12,.08);border-color:var(--amber);
+}
+.ben-card .num{
+  font-family:var(--font-mono);color:var(--blue);font-size:15px;font-weight:700;margin-bottom:12px;
+}
+.ben-card h3{font-size:18px;font-weight:700;margin-bottom:10px;}
+.ben-card p{font-size:14.5px;color:var(--ink-soft);line-height:1.5;}
 
-/* ---------- como funciona ---------- */
-.steps{margin-top:44px;position:relative;}
-.steps::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;width:1px;background:repeating-linear-gradient(to bottom, var(--blue) 0 6px, transparent 6px 12px);}
-@media(min-width:900px){.steps::before{left:0;right:0;top:19px;bottom:auto;height:1px;width:auto;background:repeating-linear-gradient(to right, var(--blue) 0 6px, transparent 6px 12px);}}
-.steps-row{display:flex;flex-direction:column;gap:30px;}
-@media(min-width:900px){.steps-row{flex-direction:row;justify-content:space-between;gap:20px;}}
-.step{display:flex;gap:16px;position:relative;z-index:1;}
-@media(min-width:900px){.step{flex-direction:column;gap:14px;max-width:200px;}}
-.step .badge{
-  flex:none;width:40px;height:40px;border-radius:50%;background:var(--navy);color:var(--cream);
-  display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:15px;font-weight:600;
+/* ---------- PLANES DE PRECIOS ---------- */
+.plans-toggle{
+  display:inline-flex;align-items:center;justify-content:center;gap:14px;
+  margin:32px auto 0;font-size:15px;background:var(--paper);
+  padding:8px 20px;border-radius:30px;border:1px solid var(--border-light);
+  box-shadow:0 4px 12px rgba(23,17,12,.04);
 }
-.step h3{font-size:18px;margin-bottom:8px;}
-.step p{font-size:14.5px;color:var(--ink-soft);line-height:1.5;}
-
-/* ---------- video demo ---------- */
-.demo-video{
-  margin-top:40px;
-  background:var(--paper);
-  border:1px solid rgba(15,26,20,.08);
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 10px 30px -18px rgba(15,26,20,.18);
+.toggle-switch{
+  width:50px;height:28px;border-radius:20px;background:#D6CAB8;position:relative;transition:background .25s;
 }
-.demo-video video{
-  display:block;
-  width:100%;
-  height:auto;
-  background:#0f1a14;
-}
-.demo-cap{
-  padding:16px 18px;
-  font-size:16.5px;
-  color:var(--ink-soft);
-  line-height:1.5;
-}
-
-/* ---------- comparativa ---------- */
-.compare-table{width:100%;border-collapse:collapse;margin-top:40px;font-size:15px;}
-.compare-table th{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:#8B7555;text-align:left;padding:12px 14px;font-weight:500;}
-.compare-table td{padding:16px 14px;border-top:1px solid rgba(255,255,255,.08);}
-.compare-table td:first-child{color:#B09B80;width:34%;}
-.compare-table td.old{color:#C0533F;}
-.compare-table td.new{color:var(--green);font-weight:600;}
-.compare-table td.new .ic{width:15px;height:15px;display:inline-block;vertical-align:-2px;margin-right:6px;}
-.compare-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-
-/* ---------- planes ---------- */
-.plans-toggle{display:flex;align-items:center;justify-content:center;gap:12px;margin:32px auto 0;font-size:14px;}
-.toggle-switch{width:46px;height:26px;border-radius:20px;background:#D4C8B6;position:relative;transition:background .2s;}
 .toggle-switch.on{background:var(--green);}
-.toggle-switch .knob{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 2px 4px rgba(0,0,0,.2);}
-.toggle-switch.on .knob{transform:translateX(20px);}
-.save-badge{font-family:var(--font-mono);font-size:11px;background:var(--green);color:#fff;padding:3px 8px;border-radius:20px;}
+.toggle-switch .knob{
+  position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;
+  transition:transform .25s;box-shadow:0 2px 5px rgba(0,0,0,.25);
+}
+.toggle-switch.on .knob{transform:translateX(22px);}
+.save-badge{
+  font-family:var(--font-mono);font-size:11.5px;background:var(--green);color:#fff;
+  padding:4px 10px;border-radius:20px;font-weight:600;
+}
 
-.plans-grid{display:grid;gap:20px;margin-top:36px;}
-@media(min-width:900px){.plans-grid{grid-template-columns:repeat(3,1fr);align-items:end;}}
+.plans-grid{display:grid;gap:24px;margin-top:40px;align-items:stretch;}
+@media(min-width:960px){.plans-grid{grid-template-columns:repeat(3,1fr);}}
 .plan-card{
-  background:var(--paper);border-radius:16px;padding:28px 24px;border:1px solid rgba(15,26,20,.08);position:relative;
-  transition:transform .18s ease, box-shadow .18s ease;
+  background:var(--paper);border-radius:18px;padding:32px 26px;border:1px solid var(--border-light);
+  position:relative;display:flex;flex-direction:column;
+  transition:all .25s ease;
 }
-.plan-card:not(.featured):hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(15,26,20,.08);}
+.plan-card:not(.featured):hover{transform:translateY(-5px);box-shadow:0 18px 36px rgba(23,17,12,.08);}
 .plan-card.featured{
-  background:var(--navy);color:var(--cream);border-color:var(--navy);
-  box-shadow:0 24px 50px rgba(15,26,20,.25);transform:scale(1.02);
+  background:var(--navy);color:var(--cream);border:2px solid var(--amber);
+  box-shadow:0 24px 50px rgba(23,17,12,.28);
 }
-.plan-card.featured:hover{transform:scale(1.02) translateY(-4px);box-shadow:0 28px 60px rgba(15,26,20,.3);}
-@media(min-width:900px){.plan-card.featured{padding:34px 26px;}}
-.plan-tag{position:absolute;top:-13px;left:24px;background:var(--amber);color:var(--navy);font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;padding:5px 12px;border-radius:20px;font-weight:600;}
-.plan-name{font-family:var(--font-display);font-size:19px;margin-bottom:6px;}
-.plan-price{font-family:var(--font-mono);font-size:32px;font-weight:600;margin:14px 0 2px;}
-.plan-price span{font-size:14px;font-weight:400;color:var(--ink-soft);}
-.precio-old{display:none;font-size:14px;font-weight:400;text-decoration:line-through;color:var(--ink-soft);opacity:.6;}
-.plan-card.featured .plan-price span{color:#95806A;}
-.plan-desc{font-size:14px;color:var(--ink-soft);margin-bottom:20px;}
-.plan-card.featured .plan-desc{color:#B09B80;}
-.plan-feats{margin:20px 0 26px;display:flex;flex-direction:column;gap:10px;}
-.plan-feats li{list-style:none;display:flex;gap:10px;font-size:14.5px;align-items:flex-start;}
-.plan-feats li .ic{width:16px;height:16px;color:var(--green);flex:none;margin-top:2px;}
+.plan-card.featured:hover{transform:translateY(-6px);box-shadow:0 30px 65px rgba(23,17,12,.38);}
+.plan-tag{
+  position:absolute;top:-13px;left:26px;background:var(--amber);color:var(--navy);
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:5px 14px;border-radius:20px;font-weight:700;box-shadow:0 4px 10px rgba(196,135,59,.35);
+}
+.plan-name{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:6px;}
+.plan-price{font-family:var(--font-mono);font-size:36px;font-weight:700;margin:16px 0 4px;line-height:1;}
+.plan-price span{font-size:15px;font-weight:400;color:var(--ink-soft);}
+.precio-old{display:none;font-size:14px;font-weight:400;text-decoration:line-through;color:var(--ink-soft);opacity:.6;margin-bottom:4px;}
+.plan-card.featured .plan-price span{color:#B9A690;}
+.plan-desc{font-size:14.5px;color:var(--ink-soft);margin-bottom:22px;line-height:1.45;}
+.plan-card.featured .plan-desc{color:#C8B9A6;}
+.plan-feats{margin:20px 0 28px;display:flex;flex-direction:column;gap:12px;flex-grow:1;}
+.plan-feats li{list-style:none;display:flex;gap:10px;font-size:14.5px;align-items:flex-start;line-height:1.4;}
+.plan-feats li .ic{width:17px;height:17px;color:var(--green);flex:none;margin-top:2px;}
 
-/* ---------- testimonios ---------- */
-.test-grid{display:grid;gap:18px;margin-top:40px;}
+/* ---------- TESTIMONIOS ---------- */
+.test-grid{display:grid;gap:20px;margin-top:40px;}
 @media(min-width:900px){.test-grid{grid-template-columns:repeat(3,1fr);}}
-.test-card{background:var(--paper);border-radius:14px;padding:16px;border:1px solid rgba(15,26,20,.06);transition:transform .18s ease, box-shadow .18s ease;}
-.test-card:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(15,26,20,.08);}
-.stars{color:var(--amber);font-size:12px;margin-bottom:8px;letter-spacing:2px;}
-.test-quote{font-size:14.5px;color:var(--ink);margin-bottom:14px;line-height:1.5;}
-.test-person{display:flex;align-items:center;gap:10px;}
-.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(140deg,var(--blue),var(--navy));flex:none;}
-img.avatar{object-fit:cover;}
-.test-name{font-size:13.5px;font-weight:600;}
-.test-role{font-size:12px;color:var(--ink-soft);}
-@media(min-width:640px){
-  .test-card{padding:24px;}
-  .stars{font-size:14px;margin-bottom:12px;}
-  .test-quote{font-size:16px;margin-bottom:20px;line-height:1.65;}
-  .test-person{gap:12px;}
-  .avatar{width:38px;height:38px;}
-  .test-name{font-size:14.5px;}
-  .test-role{font-size:13px;}
+.test-card{
+  background:var(--paper);border-radius:16px;padding:26px 24px;border:1px solid var(--border-light);
+  display:flex;flex-direction:column;justify-content:space-between;
+  transition:all .25s ease;
 }
+.test-card:hover{
+  transform:translateY(-4px);box-shadow:0 18px 36px rgba(23,17,12,.08);border-color:var(--amber);
+}
+.stars{color:var(--amber);font-size:15px;margin-bottom:12px;letter-spacing:3px;}
+.test-quote{font-size:15.5px;color:var(--ink);margin-bottom:20px;line-height:1.6;}
+.test-person{display:flex;align-items:center;gap:12px;}
+.avatar{
+  width:42px;height:42px;border-radius:50%;background:linear-gradient(140deg,var(--blue),var(--navy));
+  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;
+  flex:none;
+}
+img.avatar{object-fit:cover;}
+.test-name{font-size:15px;font-weight:700;}
+.test-role{font-size:13px;color:var(--ink-soft);}
 
 /* ---------- FAQ ---------- */
-.faq-list{max-width:760px;margin:40px auto 0;}
-.faq-item{border-bottom:1px solid rgba(15,26,20,.1);}
-.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:22px 6px;text-align:left;font-size:18px;font-weight:600;}
+.faq-list{max-width:780px;margin:40px auto 0;display:flex;flex-direction:column;gap:10px;}
+.faq-item{
+  background:var(--paper);border-radius:12px;border:1px solid var(--border-light);overflow:hidden;
+  transition:border-color .2s;
+}
+.faq-item.open{border-color:var(--amber);}
+.faq-q{
+  width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 22px;
+  text-align:left;font-size:17.5px;font-weight:600;color:var(--navy);
+}
+.faq-q:hover{color:var(--amber);}
 .faq-q .plus{flex:none;width:22px;height:22px;position:relative;}
 .faq-q .plus::before,.faq-q .plus::after{content:"";position:absolute;background:var(--ink);transition:transform .2s;}
 .faq-q .plus::before{top:10px;left:2px;right:2px;height:2px;}
 .faq-q .plus::after{left:10px;top:2px;bottom:2px;width:2px;}
 .faq-item.open .plus::after{transform:scaleY(0);}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
-.faq-a p{font-size:16px;color:var(--ink-soft);padding:0 6px 22px;line-height:1.65;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s cubic-bezier(0.16, 1, 0.3, 1);}
+.faq-a p{font-size:15.5px;color:var(--ink-soft);padding:0 22px 22px;line-height:1.65;}
 
-/* ---------- CTA final ---------- */
+/* ---------- CTA FINAL ---------- */
 .cta-final{
   background:var(--navy);color:var(--cream);text-align:center;position:relative;overflow:hidden;
+  padding:90px 0;
 }
 .cta-final::before{
   content:"";position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 0%, rgba(196,135,59,.25), transparent 60%);
+  background:radial-gradient(circle at 50% 10%, rgba(196,135,59,.3), transparent 60%);
 }
-.cta-final .inner{position:relative;z-index:1;}
-.cta-final h2{font-size:30px;max-width:640px;margin:0 auto 16px;}
-@media(min-width:640px){.cta-final h2{font-size:50px;}}
+.cta-final .inner{position:relative;z-index:2;}
+.cta-final h2{font-size:34px;max-width:700px;margin:0 auto 16px;font-weight:700;}
+@media(min-width:640px){.cta-final h2{font-size:52px;}}
 .cta-final .accent{color:var(--amber);}
-.cta-final p{color:#B09B80;max-width:480px;margin:0 auto 30px;font-size:16px;}
-.cta-final .btns{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;margin-bottom:18px;}
-.trust-row{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;margin-top:34px;margin-bottom:32px;font-family:var(--font-mono);font-size:14px;color:#8B7555;}
+.cta-final p{color:#C8B9A6;max-width:520px;margin:0 auto 32px;font-size:17px;line-height:1.55;}
+.cta-final .btns{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:24px;}
+.trust-row{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:24px;margin-top:36px;
+  font-family:var(--font-mono);font-size:13.5px;color:#A99884;
+}
 
-/* ---------- footer ---------- */
-footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:14px;}
+/* ---------- STICKY MOBILE ACTION BAR ---------- */
+.mobile-sticky-cta{
+  position:fixed;bottom:0;left:0;right:0;z-index:90;
+  background:rgba(23,17,12,.95);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-top:1px solid rgba(216,182,132,.25);
+  padding:12px 18px;
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  transform:translateY(100%);
+  transition:transform .3s ease;
+  box-shadow:0 -10px 25px rgba(0,0,0,.3);
+}
+.mobile-sticky-cta.visible{transform:translateY(0);}
+.mobile-cta-info{color:#fff;display:flex;flex-direction:column;}
+.mobile-cta-info strong{font-size:14px;color:var(--cream);}
+.mobile-cta-info span{font-size:12px;color:var(--blue-light);font-family:var(--font-mono);}
+.mobile-sticky-cta .btn{padding:9px 16px;font-size:13.5px;}
+
+@media(max-width:768px){
+  .mobile-sticky-cta{display:flex;}
+  body{padding-bottom:60px;}
+}
+
+/* ---------- FOOTER ---------- */
+footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top:1px solid rgba(255,255,255,.05);}
 .footer-wrap{display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center;}
 @media(min-width:640px){.footer-wrap{flex-direction:row;justify-content:space-between;text-align:left;}}
+.footer-links{display:flex;gap:20px;}
+.footer-links a:hover{color:var(--cream);}
+
+/* ---------- WA FAB ---------- */
 .wa-fab{
-  position:fixed;bottom:20px;right:20px;z-index:60;
+  position:fixed;bottom:24px;right:24px;z-index:80;
   width:56px;height:56px;border-radius:50%;background:var(--green);
-  display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(47,174,109,.4);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 24px rgba(42,157,97,.45);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.wa-fab:hover{
+  transform:scale(1.08) translateY(-2px);
+  box-shadow:0 14px 28px rgba(42,157,97,.6);
+}
+.wa-badge-pulse{
+  position:absolute;top:2px;right:2px;width:12px;height:12px;border-radius:50%;
+  background:#FFD700;border:2px solid #fff;
+}
+@media(max-width:768px){
+  .wa-fab{bottom:74px;right:18px;width:50px;height:50px;}
 }
 </style>
 </head>
 <body>
 
-<header>
+<!-- Header -->
+<header id="main-header">
   <nav class="nav">
-    <a href="#" class="logo"><img src="public/logo/logo-dark.svg" alt="Modulax"></a>
+    <a href="#" class="logo" aria-label="Modulax Inicio">
+      <img src="public/logo/logo-dark.svg" alt="Cotizador Modulax Logo">
+    </a>
     <div class="nav-links">
-      <a href="#como-funciona">Cómo funciona</a>
-      <a href="#caracteristicas">Características</a>
+      <a href="#solucion">Solución</a>
+      <a href="#galeria">Vistas del Sistema</a>
+      <a href="#caracteristicas">Funciones</a>
       <a href="#planes">Planes</a>
       <a href="#faq">Preguntas</a>
     </div>
-    <a href="#planes" class="btn btn-block-primary">Probar gratis</a>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a href="https://cotizador-modulax.vercel.app/login" class="btn btn-ghost-dark" style="display:none;" id="btn-header-login">Ingresar</a>
+      <a href="#planes" class="btn btn-block-primary">Probar gratis</a>
+    </div>
   </nav>
 </header>
 
 <main>
 
 <!-- ============ 1. HERO ============ -->
-<section class="hero">
+<section class="hero" id="hero">
   <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow">Diseñado para fabricantes independientes y negocios de mobiliario en melamina</p>
+    <div class="reveal">
+      <p class="eyebrow">Para talleres de carpintería y melamina a medida</p>
       <h1>Tu próxima cotización puede tomarte <span class="accent">10 minutos</span>, no 3 horas.</h1>
-      <p class="sub">Cotizador Modulax calcula materiales, herrajes, mano de obra y tu margen real — módulo por módulo — y entrega un PDF profesional con tu marca en minutos.</p>
+      <p class="sub">Cotizador Modulax calcula automáticamente tableros, tapacantos, herrajes, mano de obra y tu ganancia real. Entrega presupuestos en PDF con tu logo al instante.</p>
+      
       <div class="hero-ctas">
-        <a href="#planes" class="btn btn-primary">Probar gratis ahora →</a>
-        <a href="#como-funciona" class="btn btn-outline">Ver cómo funciona</a>
+        <a href="#planes" class="btn btn-primary">Empezar prueba gratis →</a>
+        <a href="#demo-video-anchor" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          Ver video demo
+        </a>
       </div>
-      <p class="hero-micro"><strong>Exporta cotizaciones de forma gratuita</strong> con el plan Demo</p>
+
+      <div class="hero-badges">
+        <div class="hero-chip"><span class="dot"></span> PDF con tu marca</div>
+        <div class="hero-chip"><span class="dot"></span> Proyectos en la nube</div>
+      </div>
     </div>
 
-    <div class="mock-frame">
+    <div class="mock-frame reveal-scale delay-200">
       <span class="corner tl"></span><span class="corner tr"></span>
       <span class="corner bl"></span><span class="corner br"></span>
-      <div class="mock-tick"><span>0</span><span>600</span><span>1200mm</span></div>
-      <div class="mock-screen">
-        <img src="public/img/hero/app-screen.gif" alt="Captura de la app: módulo en edición, diagrama SVG y resumen de costos" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+      <div class="mock-tick"><span>0mm</span><span>600mm</span><span>1200mm</span><span>2400mm</span></div>
+      
+      <div class="app-window">
+        <div class="window-topbar">
+          <div class="window-dots">
+            <span class="d-red"></span><span class="d-yellow"></span><span class="d-green"></span>
+          </div>
+          <span class="mono">Modulax Studio — Cocina Alta 2400mm.mlx</span>
+          <span class="window-tag"><span class="ping"></span> En vivo</span>
+        </div>
+        <div class="app-screen-view">
+          <img src="public/img/hero/app-screen.gif" alt="Captura dinámica de la aplicación Cotizador Modulax con edición de muebles y cálculo en tiempo real">
+        </div>
       </div>
+
       <div class="float-card">
-        <div class="row"><span>Materiales</span><span>S/ 1,860</span></div>
-        <div class="row"><span>Accesorios</span><span>S/ 230</span></div>
-        <div class="row"><span>Mano de obra</span><span>S/ 350</span></div>
-        <div class="row total"><span>Costo total</span><span>S/ 2,440</span></div>
-        <div class="row"><span>Margen de ganancia</span><span>S/ 1,200</span></div>
-        <div class="row total"><span>PRECIO DE VENTA</span><span class="val">S/ 3,640</span></div>
+        <div class="head">
+          <span>Resumen de Presupuesto</span>
+          <span>PDF Listo</span>
+        </div>
+        <div class="row"><span>Tableros Melamina 18mm</span><span>S/ 1,860</span></div>
+        <div class="row"><span>Herrajes & Bisagras</span><span>S/ 230</span></div>
+        <div class="row"><span>Mano de obra & Instalación</span><span>S/ 350</span></div>
+        <div class="row total"><span>Costo de fabricación</span><span>S/ 2,440</span></div>
+        <div class="row"><span>Margen de utilidad (33%)</span><span>S/ 1,200</span></div>
+        <div class="row total"><span>PRECIO AL CLIENTE</span><span class="val">S/ 3,640</span></div>
+        <div class="pill-saving">
+          <span>⚡ Tiempo invertido: <strong>8 min</strong></span>
+          <span style="font-weight:700;">-94% tiempo</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 2. PROBLEMA ============ -->
-<section class="section" id="problema">
-  <div class="wrap center" style="max-width:780px;">
-    <p class="eyebrow" style="justify-content:center;"><strong>El costo de cotizar a ojo</strong></p>
-    <h2 class="headline">Cotizar mal te está costando dinero todos los meses</h2>
-    <p class="lede center">Si todavía cotizas a mano, en Word o en una hoja de cálculo armada hace años, no eres el único — pero sí eres el que más está perdiendo.</p>
-  </div>
+<!-- ============ METRICS STRIP ============ -->
+<section class="stats-strip">
   <div class="wrap">
-
-    <div class="pain-grid">
-      <div class="pain-item">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        <div class="pain-body">
-          <h4>Horas perdidas</h4>
-          <p>Armando cada cotización a mano o en Excel, en vez de estar fabricando.</p>
-        </div>
+    <div class="stats-grid">
+      <div class="stat-box reveal">
+        <div class="num"><span class="counter" data-target="10">0</span> min</div>
+        <div class="lbl">Tiempo promedio por cotización</div>
       </div>
-      <div class="pain-item">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg>
-        <div class="pain-body">
-          <h4>Errores de cálculo</h4>
-          <p>Que dejan proyectos enteros sin margen real de ganancia.</p>
-        </div>
+      <div class="stat-box reveal delay-100">
+        <div class="num"><span class="counter" data-target="100">0</span>%</div>
+        <div class="lbl">Precisión en desglose de costos</div>
       </div>
-      <div class="pain-item">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        <div class="pain-body">
-          <h4>Clientes que se van</h4>
-          <p>Con el competidor que cotizó primero, aunque tu trabajo sea mejor.</p>
-        </div>
+      <div class="stat-box reveal delay-200">
+        <div class="num"><span class="counter" data-target="12">0</span>+</div>
+        <div class="lbl">Tipos de tableros y materiales</div>
       </div>
-      <div class="pain-item">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 19V5a2 2 0 012-2h8l6 6v10a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M14 3v6h6"/></svg>
-        <div class="pain-body">
-          <h4>Cotizaciones en papel o Word</h4>
-          <p>Que no transmiten la seriedad de tu taller.</p>
-        </div>
-      </div>
-      <div class="pain-item">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>
-        <div class="pain-body">
-          <h4>Precios de materiales desactualizados</h4>
-          <p>Que te hacen perder dinero sin que lo notes.</p>
-        </div>
-      </div>
-      <div class="pain-item">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3v18h18M7 15l4-4 3 3 5-6"/></svg>
-        <div class="pain-body">
-          <h4>Recién al terminar el proyecto</h4>
-          <p>Te enteras si de verdad ganaste o perdiste plata.</p>
-        </div>
+      <div class="stat-box reveal delay-300">
+        <div class="num">+<span class="counter" data-target="500">0</span></div>
+        <div class="lbl">Cotizaciones generadas este mes</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 3. SOLUCIÓN ============ -->
-<section class="section" style="background:var(--cream-2)" id="solucion">
-  <div class="wrap sol-wrap">
-    <div>
-      <p class="eyebrow"><strong>La solución</strong></p>
-      <h2 class="headline">Una app que piensa como carpintero y calcula como experto</h2>
-      <p class="lede" style="margin-bottom:20px;">Cotizador Modulax convierte las medidas de tu proyecto en una cotización profesional en minutos. Configuras cada mueble con las mismas variables que usas en el taller — acabados, RH, correderas, bisagras, tiradores — y la app calcula materiales, accesorios, mano de obra, gastos y tu margen de ganancia automáticamente.</p>
-      <p class="lede"><strong>Tú solo configura los módulos. La app se encarga de los números.</strong></p>
-    </div>
-    <div class="sol-visual">
-      <!-- ANIMACIÓN sugerida: micro-interacción mostrando cómo al cambiar una medida, el costo se recalcula solo -->
-      <div class="sol-row"><span class="dot"></span> Módulos, tableros, paneles y puertas <span class="tag">01</span></div>
-      <div class="sol-row"><span class="dot"></span> Acabados y accesorios por sección <span class="tag">02</span></div>
-      <div class="sol-row"><span class="dot"></span> Mano de obra: tasa fija o porcentaje <span class="tag">03</span></div>
-      <div class="sol-row"><span class="dot"></span> Gastos, imprevistos e impuestos <span class="tag">04</span></div>
-      <div class="sol-row"><span class="dot"></span> Cálculo automático en tiempo real <span class="tag">05</span></div>
-      <div class="sol-row"><span class="dot"></span> Cotización PDF con tu marca <span class="tag">06</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 4. CARACTERÍSTICAS ============ -->
-<section class="section" id="caracteristicas">
+<!-- ============ 2. PROBLEMA VS SOLUCIÓN (REDISTRIBUCIÓN VISUAL) ============ -->
+<section class="section" id="solucion">
   <div class="wrap center" style="max-width:780px;">
-    <p class="eyebrow" style="justify-content:center;"><strong>Características</strong></p>
-    <h2 class="headline">Todo lo que cotizas en tu taller, en un solo lugar</h2>
-    <p class="lede center">Nada de fórmulas genéricas: cada función está pensada para melamina, carpintería y mueblería a medida.</p>
+    <p class="eyebrow" style="justify-content:center;">El salto de calidad en tu taller</p>
+    <h2 class="headline">Deja atrás las hojas de cálculo confusas y cotiza como un profesional</h2>
+    <p class="lede center">Cotizar a mano o en Excel te hace perder horas y dinero en cada pedido. Mira la diferencia con Cotizador Modulax.</p>
   </div>
-  <div class="wrap">
 
-    <div class="feat-grid">
-      <div class="feat-card">
-        <div class="feat-header">
-          <div class="ic-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16v6H4zM7 10v4M11 10v4M15 10v4"/></svg></div>
-          <h3>Módulos a tu medida</h3>
+  <div class="wrap vs-grid">
+    <!-- El Antes -->
+    <div class="vs-card vs-card-bad reveal-left">
+      <span class="vs-badge">❌ El método tradicional (a mano o Excel)</span>
+      <h3 class="vs-title" style="color:var(--red);">El costo invisible de cotizar a ojo</h3>
+      <p class="vs-desc">Te pasas tardes enteras haciendo cuentas manuales que al final del mes reducen tu rentabilidad.</p>
+      
+      <div class="vs-list">
+        <div class="vs-item">
+          <div class="ic-status">✕</div>
+          <p><strong>2 a 3 horas perdidas por cotización:</strong> Calculando piezas, metros y fórmulas manualmente cuando podrías estar fabricando.</p>
         </div>
-        <p>Dimensiones exactas, acabado de estructura y frentes por separado, RH, cajones, correderas y tiradores.</p>
+        <div class="vs-item">
+          <div class="ic-status">✕</div>
+          <p><strong>Errores en accesorios y metros de canto:</strong> Olvidas bisagras, tapacanto grueso o fletes y te toca asumir el sobrecosto.</p>
+        </div>
+        <div class="vs-item">
+          <div class="ic-status">✕</div>
+          <p><strong>Precios desactualizados:</strong> Anotaciones dispersas en cuadernos que no reflejan el costo real de tu distribuidor.</p>
+        </div>
+        <div class="vs-item">
+          <div class="ic-status">✕</div>
+          <p><strong>Presentación informal en WhatsApp:</strong> Mensajes de texto sin desglose que generan desconfianza y retrasan el adelanto.</p>
+        </div>
+        <div class="vs-item">
+          <div class="ic-status">✕</div>
+          <p><strong>Incertidumbre en la ganancia:</strong> Te enteras recién cuando terminas la instalación si realmente ganaste dinero.</p>
+        </div>
       </div>
-      <div class="feat-card">
-        <div class="feat-header">
-          <div class="ic-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg></div>
-          <h3>Tableros y cubiertas</h3>
+    </div>
+
+    <!-- El Después -->
+    <div class="vs-card vs-card-good reveal-right">
+      <span class="vs-badge">✨ Con Cotizador Modulax</span>
+      <h3 class="vs-title" style="color:var(--blue-light);">Rapidez, precisión y margen real</h3>
+      <p class="vs-desc">Un sistema 100% web pensado para carpinteros donde cada medida actualiza el presupuesto al instante.</p>
+
+      <div class="vs-list">
+        <div class="vs-item">
+          <div class="ic-status">✓</div>
+          <p><strong>Listo en 10 minutos o menos:</strong> Ingresas medidas y el despiece de tableros, cantos y herrajes se calcula solo.</p>
         </div>
-        <p>12 tipos de material: melamina, postformado, cuarzo, granito, vidrio y más, con precios configurables. </p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-header">
-          <div class="ic-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 6v12a2 2 0 002 2h4M4 6l4-3h8l4 3M20 6v5"/></svg></div>
-          <h3>Puertas y aperturas</h3>
+        <div class="vs-item">
+          <div class="ic-status">✓</div>
+          <p><strong>Cero pérdidas por omisión:</strong> Desglose automático de insumos, mano de obra, flete y margen de imprevistos.</p>
         </div>
-        <p>Batiente, abatible o corrediza, con los mecanismos y accesorios específicos de cada sistema.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-header">
-          <div class="ic-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
-          <h3>Accesorios y herrajes</h3>
+        <div class="vs-item">
+          <div class="ic-status">✓</div>
+          <p><strong>Tu catálogo de precios centralizado:</strong> Configura tus costos de materiales, accesorios y mano de obra para presupuestos exactos.</p>
         </div>
-        <p>Canastillas, bisagras Blum, iluminación LED, componentes eléctricos y más, en la misma cotización.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-header">
-          <div class="ic-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h5M8 16h8"/></svg></div>
-          <h3>Cálculo automático</h3>
+        <div class="vs-item">
+          <div class="ic-status">✓</div>
+          <p><strong>PDF formal con el logo de tu negocio:</strong> Envía una propuesta ejecutiva clara para mejorar tu tasa de cierre y conseguir más ventas.</p>
         </div>
-        <p>Materiales, mano de obra, gastos e impuestos se recalculan solos con cada cambio, sin fórmulas manuales.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-header">
-          <div class="ic-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 2h9l5 5v15a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
-          <h3>PDF con tu marca</h3>
+        <div class="vs-item">
+          <div class="ic-status">✓</div>
+          <p><strong>Historial en la nube (Celular o PC):</strong> Guarda, duplica y reutiliza cotizaciones previas desde cualquier lugar.</p>
         </div>
-        <p>Logo, datos de empresa y color corporativo, listo para enviar por WhatsApp o correo.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-header">
-          <div class="ic-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg></div>
-          <h3>Proyectos guardados</h3>
-        </div>
-        <p>Guarda, duplica y reutiliza cotizaciones anteriores en segundos, sin empezar de cero.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-header">
-          <div class="ic-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg></div>
-          <h3>Panel de ganancia real</h3>
-        </div>
-        <p>Visualiza tu margen y el desglose de costos en tiempo real, antes de enviar la cotización.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 5. CÓMO FUNCIONA ============ -->
-<section class="section" style="background:var(--cream-2)" id="como-funciona">
-  <div class="wrap center" style="max-width:780px;">
-    <p class="eyebrow" style="justify-content:center;"><strong>Cómo funciona</strong></p>
-    <h2 class="headline">De la medida a la venta, en 5 pasos</h2>
+<!-- ============ 3. VISTAS DEL SISTEMA / TABS INTERACTIVAS ============ -->
+<section class="section" style="background:var(--cream-2)" id="galeria">
+  <div class="wrap center" style="max-width:800px;">
+    <p class="eyebrow" style="justify-content:center;">Explora la plataforma</p>
+    <h2 class="headline">Diseñado para ser intuitivo desde el primer minuto</h2>
+    <p class="lede center">Conoce las herramientas que transformarán el flujo de trabajo en tu taller:</p>
   </div>
+
   <div class="wrap">
-    <!-- ANIMACIÓN sugerida: scroll-reveal donde cada paso se ilumina a medida que el usuario baja -->
-    <div class="steps">
-      <div class="steps-row">
-        <div class="step"><div class="badge">1</div><div><h3>Ingresa las medidas</h3><p>Ancho, alto y profundidad de cada módulo, tablero o puerta.</p></div></div>
-        <div class="step"><div class="badge">2</div><div><h3>Elige materiales</h3><p>Acabados, herrajes, correderas, bisagras y accesorios.</p></div></div>
-        <div class="step"><div class="badge">3</div><div><h3>La app calcula todo</h3><p>Materiales, mano de obra, gastos, impuestos y ganancia, en tiempo real.</p></div></div>
-        <div class="step"><div class="badge">4</div><div><h3>Genera tu PDF</h3><p>Cotización profesional con tu marca, lista en segundos.</p></div></div>
-        <div class="step"><div class="badge">5</div><div><h3>Envía y cierra</h3><p>Comparte por WhatsApp o correo desde el celular o la PC.</p></div></div>
+    <!-- Pestañas interactivas -->
+    <div class="gallery-tabs reveal">
+      <button class="tab-btn active" data-tab="tab-modulos" id="btn-tab-modulos">1. Módulos & Melamina</button>
+      <button class="tab-btn" data-tab="tab-gastos" id="btn-tab-gastos">2. Gastos & Mano de Obra</button>
+      <button class="tab-btn" data-tab="tab-configuracion" id="btn-tab-config">3. Precios & Acabados</button>
+      <button class="tab-btn" data-tab="tab-proyectos" id="btn-tab-proyectos">4. Proyectos & PDF</button>
+    </div>
+
+    <!-- Panel 1: Módulos -->
+    <div class="tab-panel active" id="tab-modulos">
+      <div class="tab-visual-wrap">
+        <img src="public/img/gallery/modulos.webp" alt="Gestión y configuración de módulos en Cotizador Modulax">
+      </div>
+      <div class="tab-info-card">
+        <h3>Constructor de Módulos Inteligente</h3>
+        <p>Configura módulos altos, bajos, esquineros o columnas. La aplicación dimensiona los tableros interiores, fondos, frentes y cajoneras automáticamente con tolerancias de taller.</p>
+        <div class="tab-feature-points">
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Diferenciación de melamina estándar y resistente a la humedad (RH).</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Cálculo automático de bisagras, correderas telescópicas y tiradores.</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Tapacantos delgados y gruesos parametrizables por módulo.</span>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- Panel 2: Gastos -->
+    <div class="tab-panel" id="tab-gastos">
+      <div class="tab-visual-wrap">
+        <img src="public/img/gallery/gastos.webp" alt="Gestión de gastos e imprevistos en Cotizador Modulax">
+      </div>
+      <div class="tab-info-card">
+        <h3>Control Total de Costos y Mano de Obra</h3>
+        <p>No dejes fuera ningún gasto imprevisto. Añade fletes, movilidad, consumibles (tornillos, tarugos, adhesivos) y define tu porcentaje de mano de obra con total transparencia.</p>
+        <div class="tab-feature-points">
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Tarifas fijas o porcentuales de instalación y armado.</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Margen de seguridad para imprevistos y desperdicio de material.</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Visualización del costo bruto vs. tu utilidad neta.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 3: Configuración -->
+    <div class="tab-panel" id="tab-configuracion">
+      <div class="tab-visual-wrap">
+        <img src="public/img/gallery/configuracion.webp" alt="Panel de configuración de precios en Cotizador Modulax">
+      </div>
+      <div class="tab-info-card">
+        <h3>Tu Lista de Precios Personalizada</h3>
+        <p>Ingresa los precios a los que compras en tu distribuidor local (Pelíkano, Vesto, Masisa, Novopan, etc.). La app utilizará tus valores exactos en cada presupuesto.</p>
+        <div class="tab-feature-points">
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Precios de planchas, servicios de corte y pegado de canto.</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Catálogo de herrajes configurables según marcas (Blum, Ducasse, etc.).</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Datos comerciales y logotipo de tu taller para el membrete del PDF.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 4: Proyectos -->
+    <div class="tab-panel" id="tab-proyectos">
+      <div class="tab-visual-wrap">
+        <img src="public/img/gallery/proyectos.webp" alt="Listado de proyectos y exportación PDF en Cotizador Modulax">
+      </div>
+      <div class="tab-info-card">
+        <h3>Biblioteca de Proyectos & Exportación</h3>
+        <p>Todos tus clientes y cotizaciones organizadas en un solo lugar. Puedes duplicar un proyecto de cocina existente para un cliente nuevo en 1 clic y exportar un PDF profesional.</p>
+        <div class="tab-feature-points">
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Descarga en PDF lista para imprimir o compartir por WhatsApp.</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Historial de presupuestos aceptados, pendientes y archivados.</span>
+          </div>
+          <div class="point-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Acceso sincronizado desde tu móvil, tablet o PC de taller.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ============ 6. VIDEO DEMO ============ -->
-<section class="section" id="galeria">
+<!-- ============ 4. VIDEO DEMO ============ -->
+<section class="section section-dark" id="demo-video-anchor">
   <div class="wrap center" style="max-width:880px;">
-    <p class="eyebrow" style="justify-content:center;"><strong>Así se ve por dentro</strong></p>
-    <h2 class="headline">Un sistema completo y ordenado para cotizar en minutos</h2>
-    <div class="demo-video">
+    <p class="eyebrow" style="justify-content:center;">Demostración en video</p>
+    <h2 class="headline">Mira cómo cotizar una cocina completa en pocos minutos</h2>
+    
+    <div class="demo-video reveal-scale">
       <video
         controls
         preload="metadata"
@@ -611,272 +1030,580 @@ footer{background:#0C0806;color:#6E5A40;padding:40px 0;font-size:14px;}
         <source src="public/video/Video demo.webm" type="video/webm">
         Tu navegador no soporta video HTML5.
       </video>
-      <p class="demo-cap">Mira cómo funciona el Cotizador Modulax: configura módulos, gastos y proyectos desde cualquier dispositivo, en menos de 10 minutos.</p>
+      <div class="demo-cap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+        <span>Demostración real: Creación de proyecto, adición de módulos altos/bajos y generación instantánea del documento de cotización.</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 7. BENEFICIOS ============ -->
-<section class="section" style="background:var(--cream-2)" id="beneficios">
+<!-- ============ 5. CARACTERÍSTICAS TÉCNICAS ============ -->
+<section class="section" id="caracteristicas">
   <div class="wrap center" style="max-width:780px;">
-    <p class="eyebrow" style="justify-content:center;"><strong>Resultados para tu negocio</strong></p>
-    <h2 class="headline">Lo que cambia cuando cotizas bien</h2>
+    <p class="eyebrow" style="justify-content:center;">Funcionalidades especializadas</p>
+    <h2 class="headline">Todo lo que tu taller necesita en un solo software</h2>
+    <p class="lede center">Sin fórmulas genéricas. Cada funcionalidad fue creada pensando en los estándares reales de la carpintería moderna.</p>
   </div>
-  <div class="wrap">
 
-    <div class="ben-grid">
-      <div class="ben-card">
-        <div class="num">01</div>
-        <h3>Ahorro de tiempo</h3>
-        <p>De 2-3 horas por cotización a menos de 10 minutos.</p>
+  <div class="wrap feat-grid">
+    <div class="feat-card reveal">
+      <div class="feat-header">
+        <div class="ic-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v6H4zM7 10v4M11 10v4M15 10v4"/></svg></div>
+        <h3>Módulos a medida</h3>
       </div>
-      <div class="ben-card">
-        <div class="num">02</div>
-        <h3>Mayor precisión</h3>
-        <p>Cero errores de cálculo en materiales y mano de obra.</p>
+      <p>Dimensiones al milímetro, acabados de estructura y frentes por separado, cajones, fondos y divisiones interiores.</p>
+    </div>
+
+    <div class="feat-card reveal delay-100">
+      <div class="feat-header">
+        <div class="ic-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg></div>
+        <h3>Tableros y cubiertas</h3>
       </div>
-      <div class="ben-card">
-        <div class="num">03</div>
-        <h3>Sistema modular</h3>
-        <p>Fabrica e instala de forma rápida y sin contratiempor.</p>
+      <p>Melamina estándar, melamina RH, postformado, cuarzo, granito y otros materiales con precios configurables.</p>
+    </div>
+
+    <div class="feat-card reveal delay-200">
+      <div class="feat-header">
+        <div class="ic-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 6v12a2 2 0 002 2h4M4 6l4-3h8l4 3M20 6v5"/></svg></div>
+        <h3>Puertas & aperturas</h3>
       </div>
-      <div class="ben-card">
-        <div class="num">04</div>
-        <h3>Más ventas</h3>
-        <p>Cotizas primero y cierras antes que tu competencia.</p>
+      <p>Puertas batientes, sistemas elevables, abatibles y corredizas con cálculo de accesorios por cada apertura.</p>
+    </div>
+
+    <div class="feat-card reveal delay-300">
+      <div class="feat-header">
+        <div class="ic-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
+        <h3>Accesorios y herrajes</h3>
       </div>
-      <div class="ben-card">
-        <div class="num">05</div>
-        <h3>Mayor rentabilidad</h3>
-        <p>Sabes tu margen real en cada proyecto, antes de aceptarlo.</p>
+      <p>Canastillas organizadoras, bisagras de cierre suave, perfiles de aluminio y tiradores integrados.</p>
+    </div>
+
+    <div class="feat-card reveal">
+      <div class="feat-header">
+        <div class="ic-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h5M8 16h8"/></svg></div>
+        <h3>Cálculo en tiempo real</h3>
       </div>
+      <p>Materiales, mano de obra, gastos e impuestos se recalculan al instante con cada cambio que hagas.</p>
+    </div>
+
+    <div class="feat-card reveal delay-100">
+      <div class="feat-header">
+        <div class="ic-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
+        <h3>PDF con tu marca</h3>
+      </div>
+      <p>Emite un documento con tu logo, datos de contacto, condiciones comerciales y formas de pago listo para enviar.</p>
+    </div>
+
+    <div class="feat-card reveal delay-200">
+      <div class="feat-header">
+        <div class="ic-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg></div>
+        <h3>Proyectos en la nube</h3>
+      </div>
+      <p>Guarda, duplica y reutiliza cotizaciones previas en segundos. No vuelvas a escribir el mismo mueble dos veces.</p>
+    </div>
+
+    <div class="feat-card reveal delay-300">
+      <div class="feat-header">
+        <div class="ic-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M12 20V4M20 20v-7"/></svg></div>
+        <h3>Control de ganancia</h3>
+      </div>
+      <p>Conoce con exactitud el margen que te queda en el bolsillo antes de pactar el precio con tu cliente.</p>
     </div>
   </div>
 </section>
 
-
-<!-- ============ 8. COMPARATIVA ============ -->
-<section class="section section-dark" id="comparativa">
+<!-- ============ 6. CÓMO FUNCIONA (PASO A PASO) ============ -->
+<section class="section" style="background:var(--cream-2)" id="como-funciona">
   <div class="wrap center" style="max-width:780px;">
-    <p class="eyebrow" style="justify-content:center;"><strong>La diferencia real</strong></p>
-    <h2 class="headline">Método tradicional vs. Cotizador Modulax</h2>
+    <p class="eyebrow" style="justify-content:center;">Flujo de trabajo ágil</p>
+    <h2 class="headline">De la medida al cierre de venta en 5 pasos</h2>
+    <p class="lede center">Un proceso guiado que puedes realizar directamente desde tu smartphone en la visita técnica.</p>
   </div>
-  <div class="wrap">
-    <div class="compare-wrap">
-    <table class="compare-table">
-      <tr><th></th><th>Método tradicional</th><th>Cotizador Modulax</th></tr>
-      <tr><td>Tiempo por cotización</td><td class="old">2-3 calculando en papel o Excel</td><td class="new"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Menos de 10 minutos</td></tr>
-      <tr><td>Errores de cálculo</td><td class="old">Frecuentes y difíciles de detectar</td><td class="new"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Prácticamente nulos</td></tr>
-      <tr><td>Imagen ante el cliente</td><td class="old">Cotización a mano o en Word</td><td class="new"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>PDF profesional con tu marca</td></tr>
-      <tr><td>Precios actualizados</td><td class="old">Revisión y corrección manual</td><td class="new"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Centralizados en un solo lugar</td></tr>
-      <tr><td>Acceso</td><td class="old">Manual o Excel desde la PC</td><td class="new"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Desde el celular, tablet o PC</td></tr>
-      <tr><td>Historial de proyectos</td><td class="old">Se pierde o se desordena</td><td class="new"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Guardado, organizado y reutilizable</td></tr>
-    </table>
+
+  <div class="wrap steps-container">
+    <div class="steps-timeline">
+      <div class="step-item reveal">
+        <div class="step-badge-num">1</div>
+        <h3>Ingresa las medidas</h3>
+        <p>Introduce ancho, alto y profundidad del espacio o del módulo requerido.</p>
+      </div>
+
+      <div class="step-item reveal delay-100">
+        <div class="step-badge-num">2</div>
+        <h3>Selecciona acabados</h3>
+        <p>Escoge el tipo de melamina, porcentaje de tapacanto y herrajes.</p>
+      </div>
+
+      <div class="step-item reveal delay-200">
+        <div class="step-badge-num">3</div>
+        <h3>Cálculo automático</h3>
+        <p>La app desglosa materiales, accesorios, mano de obra, flete y margen deseado.</p>
+      </div>
+
+      <div class="step-item reveal delay-300">
+        <div class="step-badge-num">4</div>
+        <h3>Genera el PDF</h3>
+        <p>Obtén una cotización formal y detallada con el logo de tu negocio.</p>
+      </div>
+
+      <div class="step-item reveal delay-400">
+        <div class="step-badge-num">5</div>
+        <h3>Envía por WhatsApp</h3>
+        <p>Comparte al instante con el cliente y asegura el adelanto antes que otros.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 9. PLANES ============ -->
-<section class="section" id="planes">
-  <div class="wrap center" style="max-width:640px;">
-    <p class="eyebrow" style="justify-content:center;"><strong>Planes de suscripción</strong></p>
-    <h2 class="headline">Un plan para cada tamaño de taller</h2>
-    <p class="lede center">Empieza gratis con el plan Demo y sube de plan cuando tu negocio lo necesite.</p>
+<!-- ============ 7. BENEFICIOS CLAVE ============ -->
+<section class="section" id="beneficios">
+  <div class="wrap center" style="max-width:780px;">
+    <p class="eyebrow" style="justify-content:center;">Resultados comprobados</p>
+    <h2 class="headline">Lo que gana tu negocio al cotizar con Modulax</h2>
   </div>
 
-  <div class="wrap">
+  <div class="wrap ben-grid">
+    <div class="ben-card reveal">
+      <div class="num">01</div>
+      <h3>Ahorro del 90% de tiempo</h3>
+      <p>Pasa de 3 horas haciendo números en papel a cotizar en 10 minutos.</p>
+    </div>
+
+    <div class="ben-card reveal delay-100">
+      <div class="num">02</div>
+      <h3>Cero pérdidas por omisión</h3>
+      <p>Cada tornillo, bisagra y metro de canto queda contabilizado.</p>
+    </div>
+
+    <div class="ben-card reveal delay-200">
+      <div class="num">03</div>
+      <h3>Mayor tasa de cierre</h3>
+      <p>Entregar una cotización profesional incrementa tu tasa de cierre.</p>
+    </div>
+
+    <div class="ben-card reveal delay-300">
+      <div class="num">04</div>
+      <h3>Imagen profesional</h3>
+      <p>Diferénciate de talleres informales con presupuestos detallados.</p>
+    </div>
+
+    <div class="ben-card reveal delay-400">
+      <div class="num">05</div>
+      <h3>Rentabilidad asegurada</h3>
+      <p>Sabes tu margen exacto antes de cortar la primera plancha.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. PLANES DE PRECIOS ============ -->
+<section class="section" style="background:var(--cream-2)" id="planes">
+  <div class="wrap center" style="max-width:680px;">
+    <p class="eyebrow" style="justify-content:center;">Planes accesibles</p>
+    <h2 class="headline">Elige el plan ideal para tu taller</h2>
+    <p class="lede center">Comienza gratis sin compromiso y potencia tu negocio cuando estés listo.</p>
+  </div>
+
+  <div class="wrap center" style="text-align:center;">
     <div class="plans-toggle">
-      <span class="mono" id="lbl-mensual" style="font-weight:600;">Mensual</span>
-      <button class="toggle-switch" id="planToggle" aria-label="Alternar mensual/anual"><span class="knob"></span></button>
-      <span class="mono" id="lbl-anual">Anual</span>
+      <span class="mono" id="lbl-mensual" style="font-weight:600;color:var(--navy);">Mensual</span>
+      <button class="toggle-switch" id="planToggle" aria-label="Alternar facturación mensual y anual"><span class="knob"></span></button>
+      <span class="mono" id="lbl-anual" style="opacity:.6;">Anual</span>
       <span class="save-badge">Ahorra 25%</span>
     </div>
+  </div>
 
-    <div class="plans-grid">
-      <!-- DEMO -->
-      <div class="plan-card">
-        <div class="plan-name">Demo</div>
-        <div class="plan-price">Gratis</div>
-        <p class="plan-desc">Para probar la app antes de decidir.</p>
-        <ul class="plan-feats">
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>3 módulos, 1 tablero, panel y puerta</li>
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>3 PDF al mes</li>
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>2 proyecto guardado</li>
-        </ul>
-        <a href="https://cotizador-modulax.vercel.app/login" class="btn btn-ghost-dark" style="width:100%;">Empezar gratis</a>
-      </div>
+  <div class="wrap plans-grid">
+    <!-- PLAN DEMO -->
+    <div class="plan-card reveal">
+      <div class="plan-name">Demo Gratuito</div>
+      <div class="plan-price">Gratis</div>
+      <p class="plan-desc">Ideal para probar la herramienta y realizar tus primeras cotizaciones.</p>
+      
+      <ul class="plan-feats">
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 3 módulos, 1 tablero, panel y puerta</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 3 exportaciones en PDF al mes</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 2 proyectos guardados en la nube</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Acceso completo desde móvil y PC</li>
+      </ul>
+      <a href="https://cotizador-modulax.vercel.app/login" class="btn btn-ghost-dark" style="width:100%;text-align:center;">Empezar gratis</a>
+    </div>
 
-      <!-- PRO (destacado) -->
-      <div class="plan-card featured">
-        <span class="plan-tag">Recomendado</span>
-        <div class="plan-name">Pro</div>
-        <div class="plan-price"><span class="precio-old">S/ 15.90</span><span class="precio-monto" data-mensual="15.90" data-anual="159.90">S/ 15.90</span><span class="precio-periodo"> / mes</span></div>
-        <p class="plan-desc">Para talleres que cotizan todos los días y quieren crecer.</p>
-        <ul class="plan-feats">
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Módulos, tableros, paneles y puertas ilimitados</li>
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>PDF ilimitados</li>
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>20 proyectos guardados</li>
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Todos los accesorios y adicionales</li>
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Atajos de teclado y configuración avanzada</li>
-        </ul>
-        <a href="https://wa.me/51943613883?text=Hola%2C%20quiero%20empezar%20con%20el%20plan%20Pro%20del%20Cotizador%20Modulax.%20%C2%BFMe%20pueden%20ayudar%20con%20la%20activaci%C3%B3n%3F&utm_source=landing&utm_medium=pricing-pro" class="btn btn-primary" style="width:100%;">Quiero el plan Pro</a>
+    <!-- PLAN PRO (DESTACADO) -->
+    <div class="plan-card featured reveal-scale delay-100">
+      <span class="plan-tag">★ Más Popular</span>
+      <div class="plan-name">Plan Pro</div>
+      <div class="plan-price">
+        <span class="precio-old">S/ 15.90</span>
+        <span class="precio-monto" data-mensual="15.90" data-anual="159.90">S/ 15.90</span>
+        <span class="precio-periodo"> / mes</span>
       </div>
+      <p class="plan-desc">Para talleres en crecimiento que cotizan todos los días y requieren máxima flexibilidad.</p>
+      
+      <ul class="plan-feats">
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <strong>Módulos, tableros y puertas ilimitados</strong></li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <strong>Descargas PDF ilimitadas con tu logo</strong></li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 20 proyectos guardados simultáneos</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Catálogo completo de herrajes y accesorios</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Atajos de teclado y soporte prioritario WhatsApp</li>
+      </ul>
+      <a href="https://wa.me/51943613883?text=Hola%2C%20quiero%20empezar%20con%20el%20plan%20Pro%20del%20Cotizador%20Modulax.%20%C2%BFMe%20pueden%20ayudar%20con%20la%20activaci%C3%B3n%3F&utm_source=landing&utm_medium=pricing-pro" class="btn btn-primary" style="width:100%;text-align:center;">Activar Plan Pro</a>
+    </div>
 
-      <!-- BÁSICO -->
-      <div class="plan-card">
-        <div class="plan-name">Básico</div>
-        <div class="plan-price"><span class="precio-old">S/ 9.90</span><span class="precio-monto" data-mensual="9.90" data-anual="89.90">S/ 9.90</span><span class="precio-periodo"> / mes</span></div>
-        <p class="plan-desc">Para talleres pequeños que están ordenando su proceso.</p>
-        <ul class="plan-feats">
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>10 módulos, tableros, paneles y puertas</li>
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>15 PDF al mes</li>
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>10 proyectos guardados</li>
-          <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12l6 6L20 6"/></svg>Configuración de precios propios</li>
-        </ul>
-        <a href="https://wa.me/51943613883?text=Hola%2C%20quiero%20empezar%20con%20el%20plan%20B%C3%A1sico%20del%20Cotizador%20Modulax.%20%C2%BFMe%20pueden%20ayudar%20con%20la%20activaci%C3%B3n%3F&utm_source=landing&utm_medium=pricing-basico" class="btn btn-ghost-dark" style="width:100%;">Elegir Básico</a>
+    <!-- PLAN BÁSICO -->
+    <div class="plan-card reveal delay-200">
+      <div class="plan-name">Plan Básico</div>
+      <div class="plan-price">
+        <span class="precio-old">S/ 9.90</span>
+        <span class="precio-monto" data-mensual="9.90" data-anual="89.90">S/ 9.90</span>
+        <span class="precio-periodo"> / mes</span>
       </div>
+      <p class="plan-desc">Para talleres pequeños o artesanos que están ordenando su sistema de cotización.</p>
+      
+      <ul class="plan-feats">
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 10 módulos, tableros y puertas por proyecto</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 15 cotizaciones en PDF al mes</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 10 proyectos guardados en la nube</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Configuración de precios propios</li>
+      </ul>
+      <a href="https://wa.me/51943613883?text=Hola%2C%20quiero%20empezar%20con%20el%20plan%20B%C3%A1sico%20del%20Cotizador%20Modulax.%20%C2%BFMe%20pueden%20ayudar%20con%20la%20activaci%C3%B3n%3F&utm_source=landing&utm_medium=pricing-basico" class="btn btn-ghost-dark" style="width:100%;text-align:center;">Elegir Básico</a>
     </div>
   </div>
 </section>
 
-<!-- ============ 10. TESTIMONIOS ============ -->
-<section class="section" style="background:var(--cream-2)">
+<!-- ============ 10. TESTIMONIOS Y PRUEBA SOCIAL ============ -->
+<section class="section">
   <div class="wrap center" style="max-width:780px;">
-    <p class="eyebrow" style="justify-content:center;"><strong>Lo que dicen otros talleres</strong></p>
-    <h2 class="headline">Carpinteros que ya cotizan distinto</h2>
+    <p class="eyebrow" style="justify-content:center;">Talleres que confían en Modulax</p>
+    <h2 class="headline">Fabricantes que transformaron su forma de cotizar</h2>
   </div>
-  <div class="wrap">
-    <div class="test-grid">
-      <div class="test-card">
+
+  <div class="wrap test-grid">
+    <div class="test-card reveal">
+      <div>
         <div class="stars">★★★★★</div>
-        <p class="test-quote">Antes me tomaba una tarde armar una cotización de cocina completa. Ahora la tengo lista antes de terminar de medir en la casa del cliente.</p>
-        <div class="test-person"><span class="avatar"></span><div><div class="test-name">R. Huamán</div><div class="test-role">Mueblería Huamán, Arequipa</div></div></div>
+        <p class="test-quote">«Antes me tomaba una tarde entera armar una cotización de cocina con isla. Ahora la tengo lista antes de salir de la casa del cliente y el PDF se ve super elegante.»</p>
       </div>
-      <div class="test-card">
-        <div class="stars">★★★★★</div>
-        <p class="test-quote">Descubrí que en dos proyectos anteriores casi no había ganado nada. Con el desglose automático, ahora sé exactamente cuánto cobrar.</p>
-        <div class="test-person"><span class="avatar"></span><div><div class="test-name">M. Torres</div><div class="test-role">Closets & Melamina MT, Lima</div></div></div>
+      <div class="test-person">
+        <span class="avatar">RH</span>
+        <div>
+          <div class="test-name">R. Huamán</div>
+          <div class="test-role">Mueblería Huamán • Arequipa</div>
+        </div>
       </div>
-      <div class="test-card">
+    </div>
+
+    <div class="test-card reveal delay-100">
+      <div>
         <div class="stars">★★★★★</div>
-        <p class="test-quote">Una herramienta muy completa para cotizar muebles en melamina. Incluye todos los materiales detallados y hace el proceso mucho más rápido y ordenado.</p>
-        <div class="test-person"><img class="avatar" src="public/reseñas/3.jpg" alt="Logo Muebles Lozano"><div><div class="test-name">Cesar Lozano</div><div class="test-role">Muebles Lozano SAC, Lima</div></div></div>
+        <p class="test-quote">«Descubrí que en proyectos anteriores casi no ganaba nada por culpa de los herrajes y cantos no calculados. Con el desglose automático, ahora cobro lo justo con margen real.»</p>
+      </div>
+      <div class="test-person">
+        <span class="avatar">MT</span>
+        <div>
+          <div class="test-name">M. Torres</div>
+          <div class="test-role">Closets & Melamina MT • Lima Norte</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-card reveal delay-200">
+      <div>
+        <div class="stars">★★★★★</div>
+        <p class="test-quote">«Una herramienta muy completa para cotizar muebles en melamina. Incluye todos los materiales detallados y hace que nuestro equipo responda cotizaciones en minutos.»</p>
+      </div>
+      <div class="test-person">
+        <img class="avatar" src="public/reseñas/3.jpg" alt="Logo Muebles Lozano SAC">
+        <div>
+          <div class="test-name">Cesar Lozano</div>
+          <div class="test-role">Muebles Lozano SAC • Lima</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 11. FAQ ============ -->
-<section class="section" id="faq">
+<!-- ============ 11. PREGUNTAS FRECUENTES ============ -->
+<section class="section" style="background:var(--cream-2)" id="faq">
   <div class="wrap center" style="max-width:760px;">
-    <p class="eyebrow" style="justify-content:center;"><strong>Preguntas frecuentes</strong></p>
-    <h2 class="headline">Todo lo que quieres saber antes de empezar</h2>
+    <p class="eyebrow" style="justify-content:center;">Resolvemos tus dudas</p>
+    <h2 class="headline">Preguntas frecuentes</h2>
+    <p class="lede center">Todo lo que necesitas saber antes de empezar a usar Cotizador Modulax.</p>
   </div>
-  <div class="faq-list">
+
+  <div class="faq-list reveal">
     <div class="faq-item">
-      <button class="faq-q"><span>¿Necesito instalar algo en mi computadora?</span><span class="plus"></span></button>
-      <div class="faq-a"><p>No. Cotizador Modulax funciona 100% desde el navegador, en tu celular, tablet o PC, sin instalar nada.</p></div>
+      <button class="faq-q" aria-expanded="false">
+        <span>¿Necesito instalar algún programa en mi computadora?</span>
+        <span class="plus"></span>
+      </button>
+      <div class="faq-a"><p>No. Cotizador Modulax funciona directamente en la web desde tu navegador favorito (Chrome, Safari, Edge) en celular, tablet o PC, sin instalaciones ni requisitos pesados.</p></div>
     </div>
+
     <div class="faq-item">
-      <button class="faq-q"><span>¿Funciona bien desde el celular?</span><span class="plus"></span></button>
-      <div class="faq-a"><p>Sí, tiene un diseño responsive para mobile. Puedes cotizar desde el mismo taller o en la visita al cliente.</p></div>
+      <button class="faq-q" aria-expanded="false">
+        <span>¿Puedo cotizar desde mi celular durante una visita a obra?</span>
+        <span class="plus"></span>
+      </button>
+      <div class="faq-a"><p>Sí, la interfaz está 100% optimizada para pantallas táctiles de smartphone. Puedes ingresar las medidas in situ y enviar el PDF a tu cliente por WhatsApp en el acto.</p></div>
     </div>
+
     <div class="faq-item">
-      <button class="faq-q"><span>¿Puedo usar mis propios precios de materiales?</span><span class="plus"></span></button>
-      <div class="faq-a"><p>Sí, en los planes Básico y Pro puedes configurar tus propios precios de materiales, paneles y herrajes, y la app los usa en cada cálculo.</p></div>
+      <button class="faq-q" aria-expanded="false">
+        <span>¿Puedo ingresar los precios de mis propios proveedores?</span>
+        <span class="plus"></span>
+      </button>
+      <div class="faq-a"><p>Por supuesto. En los planes Básico y Pro puedes configurar el precio de plancha de melamina, costo por metro de tapacanto, bisagras, correderas y mano de obra.</p></div>
     </div>
+
     <div class="faq-item">
-      <button class="faq-q"><span>¿Qué pasa si supero el límite de PDF de mi plan?</span><span class="plus"></span></button>
-      <div class="faq-a"><p>Te avisamos apenas te acercas al límite. Puedes subir de plan en cualquier momento y seguir generando cotizaciones sin perder tu historial.</p></div>
+      <button class="faq-q" aria-expanded="false">
+        <span>¿Las cotizaciones en PDF llevan el logo de mi empresa?</span>
+        <span class="plus"></span>
+      </button>
+      <div class="faq-a"><p>Sí. Puedes subir el logo de tu empresa, ingresar RUC/DNI, teléfono, dirección y notas personalizadas (tiempo de entrega, forma de pago y validez de la oferta).</p></div>
     </div>
+
     <div class="faq-item">
-      <button class="faq-q"><span>¿Hay permanencia mínima o contrato?</span><span class="plus"></span></button>
-      <div class="faq-a"><p>No. Es una suscripción mes a mes (o anual, con descuento) y puedes cancelar cuando quieras.</p></div>
+      <button class="faq-q" aria-expanded="false">
+        <span>¿Hay permanencia obligatoria o cobro automático forzado?</span>
+        <span class="plus"></span>
+      </button>
+      <div class="faq-a"><p>No hay contratos forzosos. Las suscripciones son mensuales o anuales y puedes decidir renovar o cancelar cuando lo estimes conveniente.</p></div>
     </div>
+
     <div class="faq-item">
-      <button class="faq-q"><span>¿Cómo pago mi suscripción?</span><span class="plus"></span></button>
-      <div class="faq-a"><p>Para los planes Básico y Pro, te conectamos por WhatsApp con nuestro equipo para confirmar tu pago y activarlo al instante.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q"><span>¿Mis proyectos y datos están seguros?</span><span class="plus"></span></button>
-      <div class="faq-a"><p>Sí. Tus proyectos se guardan automáticamente cada pocos minutos y quedan asociados solo a tu cuenta.</p></div>
+      <button class="faq-q" aria-expanded="false">
+        <span>¿Cómo activo mi plan Básico o Pro?</span>
+        <span class="plus"></span>
+      </button>
+      <div class="faq-a"><p>Haces clic en activar plan y te conectamos directamente por WhatsApp con nuestro equipo de atención para coordinar el pago (Yape, Plin o transferencia) y la activación inmediata.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ============ 12. CTA FINAL ============ -->
 <section class="section cta-final">
-  <div class="wrap inner">
-    <h2><span class="accent">Cotiza</span> al milímetro</h2>
-    <h2><span class="accent">Gana</span> lo que mereces</h2>
+  <div class="wrap inner reveal-scale">
+    <h2>Cotiza con <span class="accent">precisión</span>. Gana lo que <span class="accent">mereces</span>.</h2>
+    <p>Únete a los carpinteros y fabricantes que ya ahorran horas de trabajo y cierran más proyectos cada semana.</p>
+    
+    <div class="btns">
+      <a href="https://cotizador-modulax.vercel.app/login" class="btn btn-primary">Probar gratis ahora →</a>
+      <a href="#planes" class="btn btn-outline">Ver todos los planes</a>
+    </div>
+
     <div class="trust-row">
       <span>✓ Sin tarjeta de crédito</span>
       <span>✓ Cancela cuando quieras</span>
-      <span>✓ Soporte por WhatsApp</span>
-    </div>
-    <div class="btns">
-      <a href="https://cotizador-modulax.vercel.app/login" class="btn btn-primary">Probar gratis ahora →</a>
-      <a href="#planes" class="btn btn-outline">Ver planes y precios</a>
+      <span>✓ Soporte directo por WhatsApp</span>
     </div>
   </div>
 </section>
 
 </main>
 
+<!-- Footer -->
 <footer>
   <div class="wrap footer-wrap">
-    <div>© 2026 Cotizador Modulax. Diseñado para fabricantes independientes y negocios de mobiliario en melamina.</div>
-    <div>WhatsApp: +51 943 613 883</div>
+    <div>© 2026 Cotizador Modulax. La plataforma para fabricantes de mobiliario en melamina.</div>
+    <div class="footer-links">
+      <a href="#planes">Planes</a>
+      <a href="#faq">Preguntas</a>
+      <a href="https://wa.me/51943613883">Soporte WhatsApp (+51 943 613 883)</a>
+    </div>
   </div>
 </footer>
 
-<a class="wa-fab" href="https://wa.me/51943613883?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Cotizador%20Modulax.&utm_source=landing&utm_medium=fab" aria-label="WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5.05-1.33A10 10 0 1012 2zm0 18a8 8 0 01-4.08-1.12l-.29-.17-3 .79.8-2.93-.19-.3A8 8 0 1112 20zm4.4-5.6c-.24-.12-1.4-.7-1.62-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.18-.7-.62-1.18-1.4-1.32-1.64-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28z"/></svg>
+<!-- Botón Flotante WhatsApp -->
+<a class="wa-fab" href="https://wa.me/51943613883?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Cotizador%20Modulax.&utm_source=landing&utm_medium=fab" aria-label="Contactar por WhatsApp">
+  <span class="wa-badge-pulse"></span>
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5.05-1.33A10 10 0 1012 2zm0 18a8 8 0 01-4.08-1.12l-.29-.17-3 .79.8-2.93-.19-.3A8 8 0 1112 20zm4.4-5.6c-.24-.12-1.4-.7-1.62-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.18-.7-.62-1.18-1.4-1.32-1.64-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28z"/></svg>
 </a>
 
-<script>
-// FAQ accordion
-document.querySelectorAll('.faq-item').forEach(item=>{
-  const q = item.querySelector('.faq-q');
-  const a = item.querySelector('.faq-a');
-  q.addEventListener('click', ()=>{
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(o=>{
-      o.classList.remove('open');
-      o.querySelector('.faq-a').style.maxHeight = null;
-    });
-    if(!isOpen){
-      item.classList.add('open');
-      a.style.maxHeight = a.scrollHeight + 'px';
-    }
-  });
-});
+<!-- Barra Fija Móvil de Acción -->
+<div class="mobile-sticky-cta" id="mobileStickyCta">
+  <div class="mobile-cta-info">
+    <strong>Cotizador Modulax</strong>
+    <span>Cotiza en 10 min</span>
+  </div>
+  <div style="display:flex;gap:8px;">
+    <a href="#planes" class="btn btn-primary">Probar Gratis</a>
+  </div>
+</div>
 
-// Pricing toggle mensual/anual
-const toggle = document.getElementById('planToggle');
-const lblM = document.getElementById('lbl-mensual');
-const lblA = document.getElementById('lbl-anual');
-let anual = false;
-toggle.addEventListener('click', ()=>{
-  anual = !anual;
-  toggle.classList.toggle('on', anual);
-  lblM.style.opacity = anual ? .5 : 1;
-  lblA.style.opacity = anual ? 1 : .5;
-  document.querySelectorAll('.precio-monto').forEach(el=>{
-    const old = el.previousElementSibling && el.previousElementSibling.classList.contains('precio-old') ? el.previousElementSibling : null;
-    if(anual){
-      if(old) old.style.display = 'block';
-      el.textContent = 'S/ ' + (parseFloat(el.dataset.anual) / 12).toFixed(2);
-    } else {
-      if(old) old.style.display = 'none';
-      el.textContent = 'S/ ' + el.dataset.mensual;
+<script>
+// ---------- 1. SCROLL REVEAL CON INTERSECTION OBSERVER ----------
+document.addEventListener('DOMContentLoaded', () => {
+  const revealElements = document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right');
+  
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        // If element has counters, start them
+        const counters = entry.target.querySelectorAll('.counter');
+        counters.forEach(counter => animateCounter(counter));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '0px 0px -40px 0px',
+    threshold: 0.12
+  });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // Animación de números / contadores con soporte de prefijos/sufijos y easing suave
+  function animateCounter(el) {
+    if (el.dataset.animated === "true") return;
+    el.dataset.animated = "true";
+    const target = +el.getAttribute('data-target') || 0;
+    const duration = 1800;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease-out expo suave para efecto contador profesional
+      const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const current = Math.floor(easeProgress * target);
+      el.textContent = current;
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        el.textContent = target;
+      }
     }
+    requestAnimationFrame(update);
+  }
+
+  // Observer dedicado para la barra de estadísticas
+  const statsStrip = document.querySelector('.stats-strip');
+  if (statsStrip) {
+    const statsObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counters = entry.target.querySelectorAll('.counter');
+          counters.forEach((counter, index) => {
+            setTimeout(() => {
+              animateCounter(counter);
+            }, index * 120);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.15
+    });
+    statsObserver.observe(statsStrip);
+  }
+
+  // Fallback si la barra ya está visible al cargar
+  setTimeout(() => {
+    document.querySelectorAll('.counter').forEach(counter => {
+      const rect = counter.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) {
+        animateCounter(counter);
+      }
+    });
+  }, 300);
+
+  // ---------- 2. PESTAÑAS DE LA GALERÍA DE MÓDULOS ----------
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-tab');
+      
+      tabButtons.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+    });
   });
-  document.querySelectorAll('.precio-periodo').forEach(el=>{
-    el.textContent = ' / mes';
+
+  // ---------- 3. FAQ ACCORDION ACCESIBLE ----------
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => {
+        if (o !== item) {
+          o.classList.remove('open');
+          o.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+          o.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        q.setAttribute('aria-expanded', 'true');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      } else {
+        item.classList.remove('open');
+        q.setAttribute('aria-expanded', 'false');
+        a.style.maxHeight = null;
+      }
+    });
   });
+
+  // ---------- 4. PRICING TOGGLE (MENSUAL / ANUAL) ----------
+  const toggle = document.getElementById('planToggle');
+  const lblM = document.getElementById('lbl-mensual');
+  const lblA = document.getElementById('lbl-anual');
+  let isAnual = false;
+
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      isAnual = !isAnual;
+      toggle.classList.toggle('on', isAnual);
+      toggle.setAttribute('aria-checked', isAnual.toString());
+      lblM.style.opacity = isAnual ? '.6' : '1';
+      lblM.style.fontWeight = isAnual ? '400' : '700';
+      lblA.style.opacity = isAnual ? '1' : '.6';
+      lblA.style.fontWeight = isAnual ? '700' : '400';
+
+      document.querySelectorAll('.precio-monto').forEach(el => {
+        const oldPriceEl = el.previousElementSibling && el.previousElementSibling.classList.contains('precio-old') 
+          ? el.previousElementSibling 
+          : null;
+
+        if (isAnual) {
+          if (oldPriceEl) oldPriceEl.style.display = 'block';
+          const monthlyEquivalent = (parseFloat(el.dataset.anual) / 12).toFixed(2);
+          el.textContent = 'S/ ' + monthlyEquivalent;
+        } else {
+          if (oldPriceEl) oldPriceEl.style.display = 'none';
+          el.textContent = 'S/ ' + el.dataset.mensual;
+        }
+      });
+    });
+  }
+
+  // ---------- 5. STICKY MOBILE BAR TRIGGER ON SCROLL ----------
+  const mobileCta = document.getElementById('mobileStickyCta');
+  const heroSection = document.getElementById('hero');
+
+  window.addEventListener('scroll', () => {
+    if (!mobileCta || !heroSection) return;
+    const heroBottom = heroSection.getBoundingClientRect().bottom;
+    if (heroBottom < 0) {
+      mobileCta.classList.add('visible');
+    } else {
+      mobileCta.classList.remove('visible');
+    }
+  }, { passive: true });
 });
-lblA.style.opacity = .5;
 </script>
 
 </body>
