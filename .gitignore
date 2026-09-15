@@ -1,4 +1,4 @@
-﻿# OS
+# OS
 Thumbs.db
 .DS_Store
 *.swp
@@ -6,3 +6,7 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Dependencies
+node_modules/
+

@@ -1,0 +1,8 @@
+{
+  "name": "Cotizador Modulax",
+  "description": "Cotizador de mobiliario modular en minutos: elige módulos, configura acabados y recibe tu presupuesto al instante.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
