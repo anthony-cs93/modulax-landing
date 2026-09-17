@@ -441,6 +441,31 @@ header{
   background:var(--navy);color:var(--cream);border-color:var(--navy);
   box-shadow:0 6px 18px rgba(23,17,12,.18);
 }
+.tabs-carousel{display:contents;}
+.tabs-arrow,.tabs-counter{display:none;}
+@media(max-width:767px){
+  .tabs-carousel{display:flex;align-items:center;gap:10px;margin:28px 0 8px;}
+  .tabs-carousel .gallery-tabs{
+    flex:1;display:flex;flex-wrap:nowrap;justify-content:flex-start;overflow:hidden;
+    gap:10px;margin:0;scroll-behavior:smooth;
+  }
+  .tabs-carousel .gallery-tabs::before,
+  .tabs-carousel .gallery-tabs::after{content:"";flex:0 0 calc((100% - 56%)/2);}
+  .tabs-carousel .gallery-tabs::before{margin-right:-10px;}
+  .tabs-carousel .tab-btn{
+    flex:0 0 56%;padding:8px 12px;font-size:12.5px;white-space:nowrap;
+    opacity:.4;scroll-snap-align:center;
+  }
+  .tabs-carousel .tab-btn.active{opacity:1;}
+  .tabs-arrow{
+    display:inline-flex;align-items:center;justify-content:center;flex:none;
+    width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--cream);
+    font-size:22px;font-weight:700;line-height:1;
+  }
+  .tabs-arrow:active{transform:scale(.96);}
+  .tabs-arrow:disabled{opacity:.35;cursor:default;pointer-events:none;}
+  .tabs-counter{display:block;text-align:center;font-size:12px;color:var(--ink-soft);margin:0 0 20px;}
+}
 .tab-panel{
   display:none;
   animation:fadePanel .35s ease;
@@ -907,14 +932,19 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
 
   <div class="wrap">
     <!-- Pestañas interactivas -->
-    <div class="gallery-tabs reveal">
-      <button class="tab-btn active" data-tab="tab-modulos" id="btn-tab-modulos">1. Módulos</button>
-      <button class="tab-btn" data-tab="tab-adicionales" id="btn-tab-adicionales">2. Adicionales</button>
-      <button class="tab-btn" data-tab="tab-gastos" id="btn-tab-gastos">3. Gastos</button>
-      <button class="tab-btn" data-tab="tab-ganancia" id="btn-tab-ganancia">4. Ganancia</button>
-      <button class="tab-btn" data-tab="tab-precios" id="btn-tab-precios">5. Precios</button>
-      <button class="tab-btn" data-tab="tab-logo-pdf" id="btn-tab-logo-pdf">6. Logo y PDF</button>
+    <div class="tabs-carousel reveal">
+      <button class="tabs-arrow" id="tabsPrev" aria-label="Ver pestaña anterior">‹</button>
+      <div class="gallery-tabs" id="galleryTabs">
+        <button class="tab-btn active" data-tab="tab-modulos" id="btn-tab-modulos">1. Módulos</button>
+        <button class="tab-btn" data-tab="tab-adicionales" id="btn-tab-adicionales">2. Adicionales</button>
+        <button class="tab-btn" data-tab="tab-gastos" id="btn-tab-gastos">3. Gastos</button>
+        <button class="tab-btn" data-tab="tab-ganancia" id="btn-tab-ganancia">4. Ganancia</button>
+        <button class="tab-btn" data-tab="tab-precios" id="btn-tab-precios">5. Precios</button>
+        <button class="tab-btn" data-tab="tab-logo-pdf" id="btn-tab-logo-pdf">6. Logo y PDF</button>
+      </div>
+      <button class="tabs-arrow" id="tabsNext" aria-label="Ver pestaña siguiente">›</button>
     </div>
+    <div class="tabs-counter mono" aria-live="polite"><span id="tabsCounter">1 / 6</span></div>
 
     <!-- Panel 1: Módulos -->
     <div class="tab-panel active" id="tab-modulos">
@@ -1526,21 +1556,70 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- 2. PESTAÑAS DE LA GALERÍA DE MÓDULOS ----------
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabPanels = document.querySelectorAll('.tab-panel');
+  const tabsPrev = document.getElementById('tabsPrev');
+  const tabsNext = document.getElementById('tabsNext');
+  const tabsCounter = document.getElementById('tabsCounter');
+  const galleryTabs = document.getElementById('galleryTabs');
+  let tabIndex = 0;
 
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-tab');
-      
-      tabButtons.forEach(b => b.classList.remove('active'));
-      tabPanels.forEach(p => p.classList.remove('active'));
+  function reduceMotion() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
 
-      btn.classList.add('active');
-      const targetPanel = document.getElementById(targetId);
-      if (targetPanel) {
-        targetPanel.classList.add('active');
-      }
-    });
+  function updateArrows() {
+    if (tabsPrev) tabsPrev.disabled = tabIndex === 0;
+    if (tabsNext) tabsNext.disabled = tabIndex === tabButtons.length - 1;
+  }
+
+  function goToTab(i) {
+    if (!tabButtons.length) return;
+    tabIndex = Math.max(0, Math.min(i, tabButtons.length - 1));
+    const btn = tabButtons[tabIndex];
+    const targetId = btn.getAttribute('data-tab');
+
+    tabButtons.forEach(b => b.classList.remove('active'));
+    tabPanels.forEach(p => p.classList.remove('active'));
+
+    btn.classList.add('active');
+    const targetPanel = document.getElementById(targetId);
+    if (targetPanel) {
+      targetPanel.classList.add('active');
+    }
+    if (tabsCounter) {
+      tabsCounter.textContent = (tabIndex + 1) + ' / ' + tabButtons.length;
+    }
+    if (window.innerWidth < 768 && typeof btn.scrollIntoView === 'function') {
+      try {
+        btn.scrollIntoView({ inline: 'center', block: 'nearest', behavior: reduceMotion() ? 'auto' : 'smooth' });
+      } catch (e) { /* noop */ }
+    }
+    updateArrows();
+  }
+
+  tabButtons.forEach((btn, i) => {
+    btn.addEventListener('click', () => goToTab(i));
   });
+
+  if (tabsPrev) tabsPrev.addEventListener('click', () => goToTab(tabIndex - 1));
+  if (tabsNext) tabsNext.addEventListener('click', () => goToTab(tabIndex + 1));
+
+  updateArrows();
+
+  // Swipe sobre el track de tabs (móvil)
+  if (galleryTabs) {
+    let startX = null;
+    galleryTabs.addEventListener('touchstart', (e) => {
+      startX = e.touches && e.touches.length ? e.touches[0].clientX : null;
+    }, { passive: true });
+    galleryTabs.addEventListener('touchend', (e) => {
+      if (startX === null) return;
+      const endX = e.changedTouches && e.changedTouches.length ? e.changedTouches[0].clientX : startX;
+      const dx = endX - startX;
+      startX = null;
+      if (Math.abs(dx) < 40) return;
+      goToTab(dx < 0 ? tabIndex + 1 : tabIndex - 1);
+    }, { passive: true });
+  }
 
   // ---------- 3. FAQ ACCORDION ACCESIBLE ----------
   document.querySelectorAll('.faq-item').forEach(item => {
