@@ -526,15 +526,32 @@ header{
 
 /* ---------- VIDEO DEMO ---------- */
 .demo-video{
-  margin-top:40px;
+  margin:40px auto 0;
   background:var(--navy);
   border:1px solid rgba(216,182,132,.25);
   border-radius:18px;
   overflow:hidden;
   box-shadow:0 24px 55px rgba(23,17,12,.2);
+  max-width:400px;
+  padding:10px;
 }
-.demo-video video{
-  display:block;width:100%;height:auto;background:#0E0A07;
+.demo-cover{
+  position:relative;display:block;background:#0E0A07;overflow:hidden;
+}
+.demo-cover img{display:block;width:100%;height:auto;}
+.demo-play{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  transition:opacity .2s;
+}
+.demo-play-ring{
+  width:64px;height:64px;border-radius:50%;
+  background:rgba(23,17,12,.55);border:2px solid rgba(255,255,255,.9);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  transition:all .2s ease;box-shadow:0 8px 24px rgba(0,0,0,.35);
+}
+.demo-cover:hover .demo-play-ring{
+  transform:scale(1.08);background:var(--amber);color:var(--navy);
+  background:var(--amber);border-color:var(--amber);
 }
 .demo-cap{
   padding:20px 24px;
@@ -1105,20 +1122,23 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
     <h2 class="headline">Mira cómo cotizar una cocina completa en pocos minutos</h2>
     
     <div class="demo-video reveal-scale">
-      <video
-        controls
-        preload="metadata"
-        playsinline
-        muted
-        poster="public/img/gallery/modulos.webp">
-        <source src="public/video/Video demo.webm" type="video/webm">
-        Tu navegador no soporta video HTML5.
-      </video>
+      <a href="https://www.tiktok.com/@ac.muebleria/video/7676745568059723028" target="_blank" rel="noopener" class="demo-cover" aria-label="Ver el video de demostración en TikTok">
+        <img src="public/img/gallery/tiktok-cover.jpg" alt="Video demo de Cotizador Modulax en TikTok">
+        <span class="demo-play">
+          <span class="demo-play-ring">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="8 5 19 12 8 19 8 5"/></svg>
+          </span>
+        </span>
+      </a>
       <div class="demo-cap">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-        <span>Demostración real: Creación de proyecto, adición de módulos altos/bajos y generación instantánea del documento de cotización.</span>
+        <span>Demo real en TikTok: medidas, materiales, accesorios y mano de obra calculados en minutos. Toca ▶ para ver el video completo en TikTok.</span>
       </div>
     </div>
+    <a href="https://www.tiktok.com/@ac.muebleria" target="_blank" rel="noopener nofollow" class="btn btn-outline" style="margin-top:24px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 1h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.77.12V7.8a5.85 5.85 0 0 0-.77-.05A5.77 5.77 0 1 0 15.63 13.5V8.85a7.35 7.35 0 0 0 4.1 1.24V7a4.28 4.28 0 0 1-3.13-1.18Z" fill="currentColor" stroke="none"/></svg>
+      Ver más en TikTok · @ac.muebleria
+    </a>
   </div>
 </section>
 
