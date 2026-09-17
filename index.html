@@ -490,6 +490,9 @@ header{
   width:100%;height:auto;border-radius:10px;object-fit:cover;
   transition:transform .4s ease;
 }
+.tab-visual-wrap img.tab-crop-bottom{
+  aspect-ratio:2.07 / 1;object-fit:cover;object-position:center top;
+}
 .tab-visual-wrap:hover img{transform:scale(1.015);}
 .tab-info-card{
   background:var(--paper);border-radius:16px;padding:30px 26px;border:1px solid var(--border-light);
@@ -1075,7 +1078,7 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
     <!-- Panel 5: Precios -->
     <div class="tab-panel" id="tab-precios">
       <div class="tab-visual-wrap">
-        <img src="public/img/gallery/precios.webp" alt="Personalización de precios de materiales, tableros, acabados y accesorios en Cotizador Modulax">
+        <img src="public/img/gallery/precios.webp" class="tab-crop-bottom" alt="Personalización de precios de materiales, tableros, acabados y accesorios en Cotizador Modulax">
       </div>
       <div class="tab-info-card">
         <h3>Tus precios 100% personalizados</h3>
