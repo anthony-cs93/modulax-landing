@@ -257,7 +257,16 @@ header{
 .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:24px;}
 .hero-badges{
   display:flex;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:12.5px;color:#B9A58E;
+  margin-bottom:16px;
 }
+.hero-proof{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;
+  font-size:14px;color:#D2C4B2;
+}
+.hero-proof .stars{color:var(--amber);font-size:14px;margin:0;letter-spacing:2px;}
+.hero-proof a{color:var(--blue-light);font-weight:600;text-decoration:underline;text-underline-offset:3px;}
+.hero-proof a:hover{color:#fff;}
+.hero-proof a:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:4px;}
 .hero-chip{
   display:inline-flex;align-items:center;gap:6px;padding:5px 12px;
   background:rgba(255,255,255,.06);border:1px solid rgba(216,182,132,.18);
@@ -488,27 +497,6 @@ header{
 .feat-card h3{font-size:18px;font-weight:700;color:var(--navy);}
 .feat-card p{font-size:14.5px;color:var(--ink-soft);line-height:1.5;}
 
-/* ---------- CÓMO FUNCIONA ---------- */
-.steps-container{margin-top:48px;position:relative;}
-.steps-timeline{
-  display:grid;gap:20px;
-}
-@media(min-width:960px){.steps-timeline{grid-template-columns:repeat(5,1fr);}}
-.step-item{
-  background:var(--paper);border-radius:14px;padding:24px 20px;border:1px solid var(--border-light);
-  position:relative;transition:all .25s ease;display:flex;flex-direction:column;gap:12px;
-}
-.step-item:hover{
-  transform:translateY(-4px);box-shadow:0 16px 30px rgba(23,17,12,.08);border-color:var(--amber);
-}
-.step-badge-num{
-  width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--cream);
-  display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);
-  font-size:15px;font-weight:700;box-shadow:0 4px 10px rgba(23,17,12,.2);
-}
-.step-item h3{font-size:17.5px;font-weight:700;color:var(--navy);}
-.step-item p{font-size:14px;color:var(--ink-soft);line-height:1.5;}
-
 /* ---------- VIDEO DEMO ---------- */
 .demo-video{
   margin-top:40px;
@@ -586,14 +574,19 @@ header{
   position:absolute;top:-13px;left:26px;background:var(--amber);color:var(--navy);
   font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
   padding:5px 14px;border-radius:20px;font-weight:700;box-shadow:0 4px 10px rgba(196,135,59,.35);
+  display:inline-flex;align-items:center;gap:6px;
 }
-.plan-name{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:6px;}
-.plan-price{font-family:var(--font-mono);font-size:36px;font-weight:700;margin:16px 0 4px;line-height:1;}
+.plan-tag svg{flex:none;display:block;}
+.plan-name{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:6px;min-height:28px;}
+.plan-price{font-family:var(--font-mono);font-size:36px;font-weight:700;margin:16px 0 4px;line-height:1;min-height:70px;}
 .plan-price span{font-size:15px;font-weight:400;color:var(--ink-soft);}
+.precio-monto + .precio-periodo{margin-left:6px;}
 .precio-old{display:none;font-size:14px;font-weight:400;text-decoration:line-through;color:var(--ink-soft);opacity:.6;margin-bottom:4px;}
 .plan-card.featured .plan-price span{color:#B9A690;}
-.plan-desc{font-size:14.5px;color:var(--ink-soft);margin-bottom:22px;line-height:1.45;}
+.plan-desc{font-size:14.5px;color:var(--ink-soft);margin-bottom:22px;line-height:1.45;min-height:63px;}
 .plan-card.featured .plan-desc{color:#C8B9A6;}
+.precio-note{display:block;font-size:11px;font-weight:400;color:var(--ink-muted);margin-top:3px;white-space:nowrap;line-height:1.3;min-height:15px;opacity:.75;letter-spacing:.01em;}
+.plan-card.featured .precio-note{color:#8F7F6E;opacity:.7;}
 .plan-feats{margin:20px 0 28px;display:flex;flex-direction:column;gap:12px;flex-grow:1;}
 .plan-feats li{list-style:none;display:flex;gap:10px;font-size:14.5px;align-items:flex-start;line-height:1.4;}
 .plan-feats li .ic{width:17px;height:17px;color:var(--green);flex:none;margin-top:2px;}
@@ -706,6 +699,10 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
   transform:scale(1.08) translateY(-2px);
   box-shadow:0 14px 28px rgba(42,157,97,.6);
 }
+.wa-fab.hidden{
+  opacity:0;pointer-events:none;transform:translateY(10px);
+}
+.wa-fab{transition:transform .2s ease, box-shadow .2s ease, opacity .25s ease;}
 .wa-badge-pulse{
   position:absolute;top:2px;right:2px;width:12px;height:12px;border-radius:50%;
   background:#FFD700;border:2px solid #fff;
@@ -756,8 +753,14 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
       </div>
 
       <div class="hero-badges">
+        <div class="hero-chip"><span class="dot"></span> Sin tarjeta de crédito</div>
+        <div class="hero-chip"><span class="dot"></span> Soporte por WhatsApp</div>
         <div class="hero-chip"><span class="dot"></span> PDF con tu marca</div>
-        <div class="hero-chip"><span class="dot"></span> Proyectos en la nube</div>
+      </div>
+
+      <div class="hero-proof">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span><strong>4.9/5</strong> — 30+ talleres en Lima y Arequipa ya cotizan con Modulax · <a href="#testimonios">Ver casos</a></span>
       </div>
     </div>
 
@@ -808,16 +811,16 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
         <div class="lbl">Tiempo promedio por cotización</div>
       </div>
       <div class="stat-box reveal delay-100">
-        <div class="num"><span class="counter" data-target="100">0</span>%</div>
-        <div class="lbl">Precisión en desglose de costos</div>
+        <div class="num"><span class="counter" data-target="33">0</span>%</div>
+        <div class="lbl">Margen de utilidad visible antes de fabricar</div>
       </div>
       <div class="stat-box reveal delay-200">
         <div class="num"><span class="counter" data-target="12">0</span>+</div>
         <div class="lbl">Tipos de tableros y materiales</div>
       </div>
       <div class="stat-box reveal delay-300">
-        <div class="num">+<span class="counter" data-target="500">0</span></div>
-        <div class="lbl">Cotizaciones generadas este mes</div>
+        <div class="num">+<span class="counter" data-target="32">0</span></div>
+        <div class="lbl">Talleres cotizando cada semana</div>
       </div>
     </div>
   </div>
@@ -1165,50 +1168,7 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
   </div>
 </section>
 
-<!-- ============ 6. CÓMO FUNCIONA (PASO A PASO) ============ -->
-<section class="section" style="background:var(--cream-2)" id="como-funciona">
-  <div class="wrap center" style="max-width:780px;">
-    <p class="eyebrow" style="justify-content:center;">Flujo de trabajo ágil</p>
-    <h2 class="headline">De la medida al cierre de venta en 5 pasos</h2>
-    <p class="lede center">Un proceso guiado que puedes realizar directamente desde tu smartphone en la visita técnica.</p>
-  </div>
-
-  <div class="wrap steps-container">
-    <div class="steps-timeline">
-      <div class="step-item reveal">
-        <div class="step-badge-num">1</div>
-        <h3>Ingresa las medidas</h3>
-        <p>Introduce ancho, alto y profundidad del espacio o del módulo requerido.</p>
-      </div>
-
-      <div class="step-item reveal delay-100">
-        <div class="step-badge-num">2</div>
-        <h3>Selecciona acabados</h3>
-        <p>Escoge el tipo de melamina, porcentaje de tapacanto y herrajes.</p>
-      </div>
-
-      <div class="step-item reveal delay-200">
-        <div class="step-badge-num">3</div>
-        <h3>Cálculo automático</h3>
-        <p>La app desglosa materiales, accesorios, mano de obra, flete y margen deseado.</p>
-      </div>
-
-      <div class="step-item reveal delay-300">
-        <div class="step-badge-num">4</div>
-        <h3>Genera el PDF</h3>
-        <p>Obtén una cotización formal y detallada con el logo de tu negocio.</p>
-      </div>
-
-      <div class="step-item reveal delay-400">
-        <div class="step-badge-num">5</div>
-        <h3>Envía por WhatsApp</h3>
-        <p>Comparte al instante con el cliente y asegura el adelanto antes que otros.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 7. BENEFICIOS CLAVE ============ -->
+<!-- ============ 6. BENEFICIOS CLAVE ============ -->
 <section class="section" id="beneficios">
   <div class="wrap center" style="max-width:780px;">
     <p class="eyebrow" style="justify-content:center;">Resultados comprobados</p>
@@ -1248,7 +1208,7 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
   </div>
 </section>
 
-<!-- ============ 8. PLANES DE PRECIOS ============ -->
+<!-- ============ 7. PLANES DE PRECIOS ============ -->
 <section class="section" style="background:var(--cream-2)" id="planes">
   <div class="wrap center" style="max-width:680px;">
     <p class="eyebrow" style="justify-content:center;">Planes accesibles</p>
@@ -1259,9 +1219,9 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
   <div class="wrap center" style="text-align:center;">
     <div class="plans-toggle">
       <span class="mono" id="lbl-mensual" style="font-weight:600;color:var(--navy);">Mensual</span>
-      <button class="toggle-switch" id="planToggle" aria-label="Alternar facturación mensual y anual"><span class="knob"></span></button>
+      <button class="toggle-switch" id="planToggle" role="switch" aria-checked="false" aria-label="Alternar facturación mensual y anual"><span class="knob"></span></button>
       <span class="mono" id="lbl-anual" style="opacity:.6;">Anual</span>
-      <span class="save-badge">Ahorra 25%</span>
+      <span class="save-badge">Ahorra hasta 50%</span>
     </div>
   </div>
 
@@ -1281,14 +1241,33 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
       <a href="https://cotizador-modulax.vercel.app/login" class="btn btn-ghost-dark" style="width:100%;text-align:center;">Empezar gratis</a>
     </div>
 
+    <!-- PLAN BÁSICO -->
+    <div class="plan-card reveal delay-100">
+      <div class="plan-name">Plan Básico</div>
+      <div class="plan-price">
+        <span class="precio-old">S/ 9.90</span>
+        <span class="precio-monto" data-mensual="9.90" data-anual="59.90">S/ 9.90</span><span class="precio-periodo">/mes</span>
+        <span class="precio-note" data-mensual-note="" data-anual-note="S/ 59.90/año"> </span>
+      </div>
+      <p class="plan-desc">Para talleres pequeños o artesanos que están ordenando su sistema de cotización.</p>
+      
+      <ul class="plan-feats">
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 10 módulos, tableros y puertas por proyecto</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 15 cotizaciones en PDF al mes</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 10 proyectos guardados en la nube</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Configuración de precios propios</li>
+      </ul>
+      <a href="https://wa.me/51943613883?text=Hola%2C%20quiero%20empezar%20con%20el%20plan%20B%C3%A1sico%20del%20Cotizador%20Modulax.%20%C2%BFMe%20pueden%20ayudar%20con%20la%20activaci%C3%B3n%3F&utm_source=landing&utm_medium=pricing-basico" class="btn btn-ghost-dark" style="width:100%;text-align:center;">Elegir Básico</a>
+    </div>
+
     <!-- PLAN PRO (DESTACADO) -->
-    <div class="plan-card featured reveal-scale delay-100">
-      <span class="plan-tag">★ Más Popular</span>
+    <div class="plan-card featured reveal-scale delay-200">
+      <span class="plan-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.94 6.36 6.96.8-5.16 4.73 1.4 6.86L12 17.27 5.86 20.75l1.4-6.86L2.1 9.16l6.96-.8L12 2z"/></svg>Recomendado</span>
       <div class="plan-name">Plan Pro</div>
       <div class="plan-price">
         <span class="precio-old">S/ 15.90</span>
-        <span class="precio-monto" data-mensual="15.90" data-anual="159.90">S/ 15.90</span>
-        <span class="precio-periodo"> / mes</span>
+        <span class="precio-monto" data-mensual="15.90" data-anual="99.90">S/ 15.90</span><span class="precio-periodo">/mes</span>
+        <span class="precio-note" data-mensual-note="" data-anual-note="S/ 99.90/año"> </span>
       </div>
       <p class="plan-desc">Para talleres en crecimiento que cotizan todos los días y requieren máxima flexibilidad.</p>
       
@@ -1301,30 +1280,11 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
       </ul>
       <a href="https://wa.me/51943613883?text=Hola%2C%20quiero%20empezar%20con%20el%20plan%20Pro%20del%20Cotizador%20Modulax.%20%C2%BFMe%20pueden%20ayudar%20con%20la%20activaci%C3%B3n%3F&utm_source=landing&utm_medium=pricing-pro" class="btn btn-primary" style="width:100%;text-align:center;">Activar Plan Pro</a>
     </div>
-
-    <!-- PLAN BÁSICO -->
-    <div class="plan-card reveal delay-200">
-      <div class="plan-name">Plan Básico</div>
-      <div class="plan-price">
-        <span class="precio-old">S/ 9.90</span>
-        <span class="precio-monto" data-mensual="9.90" data-anual="89.90">S/ 9.90</span>
-        <span class="precio-periodo"> / mes</span>
-      </div>
-      <p class="plan-desc">Para talleres pequeños o artesanos que están ordenando su sistema de cotización.</p>
-      
-      <ul class="plan-feats">
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 10 módulos, tableros y puertas por proyecto</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 15 cotizaciones en PDF al mes</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 10 proyectos guardados en la nube</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Configuración de precios propios</li>
-      </ul>
-      <a href="https://wa.me/51943613883?text=Hola%2C%20quiero%20empezar%20con%20el%20plan%20B%C3%A1sico%20del%20Cotizador%20Modulax.%20%C2%BFMe%20pueden%20ayudar%20con%20la%20activaci%C3%B3n%3F&utm_source=landing&utm_medium=pricing-basico" class="btn btn-ghost-dark" style="width:100%;text-align:center;">Elegir Básico</a>
-    </div>
   </div>
 </section>
 
-<!-- ============ 10. TESTIMONIOS Y PRUEBA SOCIAL ============ -->
-<section class="section">
+<!-- ============ 8. TESTIMONIOS Y PRUEBA SOCIAL ============ -->
+<section class="section" id="testimonios">
   <div class="wrap center" style="max-width:780px;">
     <p class="eyebrow" style="justify-content:center;">Talleres que confían en Modulax</p>
     <h2 class="headline">Fabricantes que transformaron su forma de cotizar</h2>
@@ -1375,7 +1335,7 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
   </div>
 </section>
 
-<!-- ============ 11. PREGUNTAS FRECUENTES ============ -->
+<!-- ============ 9. PREGUNTAS FRECUENTES ============ -->
 <section class="section" style="background:var(--cream-2)" id="faq">
   <div class="wrap center" style="max-width:760px;">
     <p class="eyebrow" style="justify-content:center;">Resolvemos tus dudas</p>
@@ -1434,8 +1394,8 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
   </div>
 </section>
 
-<!-- ============ 12. CTA FINAL ============ -->
-<section class="section cta-final">
+<!-- ============ 10. CTA FINAL ============ -->
+<section class="section cta-final" id="cta-final">
   <div class="wrap inner reveal-scale">
     <h2>Cotiza con <span class="accent">precisión</span>. Gana lo que <span class="accent">mereces</span>.</h2>
     <p>Únete a los carpinteros y fabricantes que ya ahorran horas de trabajo y cierran más proyectos cada semana.</p>
@@ -1629,14 +1589,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const oldPriceEl = el.previousElementSibling && el.previousElementSibling.classList.contains('precio-old') 
           ? el.previousElementSibling 
           : null;
+        const periodoEl = el.nextElementSibling && el.nextElementSibling.classList.contains('precio-periodo')
+          ? el.nextElementSibling
+          : null;
+        const noteEl = el.parentElement ? el.parentElement.querySelector('.precio-note') : null;
 
         if (isAnual) {
-          if (oldPriceEl) oldPriceEl.style.display = 'block';
+          if (oldPriceEl) oldPriceEl.style.display = 'none';
           const monthlyEquivalent = (parseFloat(el.dataset.anual) / 12).toFixed(2);
           el.textContent = 'S/ ' + monthlyEquivalent;
+          if (periodoEl) periodoEl.textContent = '/mes';
+          if (noteEl && noteEl.dataset.anualNote) noteEl.textContent = noteEl.dataset.anualNote;
         } else {
           if (oldPriceEl) oldPriceEl.style.display = 'none';
           el.textContent = 'S/ ' + el.dataset.mensual;
+          if (periodoEl) periodoEl.textContent = '/mes';
+          if (noteEl) noteEl.textContent = '';
         }
       });
     });
@@ -1645,15 +1613,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- 5. STICKY MOBILE BAR TRIGGER ON SCROLL ----------
   const mobileCta = document.getElementById('mobileStickyCta');
   const heroSection = document.getElementById('hero');
+  const ctaFinal = document.getElementById('cta-final');
+  const waFab = document.querySelector('.wa-fab');
 
   window.addEventListener('scroll', () => {
     if (!mobileCta || !heroSection) return;
     const heroBottom = heroSection.getBoundingClientRect().bottom;
-    if (heroBottom < 0) {
-      mobileCta.classList.add('visible');
-    } else {
-      mobileCta.classList.remove('visible');
+    let ctaVisible = false;
+    if (ctaFinal) {
+      const r = ctaFinal.getBoundingClientRect();
+      ctaVisible = r.top < window.innerHeight && r.bottom > 0;
     }
+    const showSticky = heroBottom < 0 && !ctaVisible;
+    mobileCta.classList.toggle('visible', showSticky);
+    if (waFab) waFab.classList.toggle('hidden', showSticky);
   }, { passive: true });
 });
 </script>
