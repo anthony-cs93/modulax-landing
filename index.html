@@ -473,7 +473,9 @@ header{
 .tab-panel.active{
   display:grid;gap:28px;align-items:center;
 }
-@media(min-width:960px){.tab-panel.active{grid-template-columns:1.25fr 0.95fr;}}
+.tab-panel.active .tab-info-card{order:1;}
+.tab-panel.active .tab-visual-wrap{order:2;}
+@media(min-width:960px){.tab-panel.active{grid-template-columns:0.95fr 1.25fr;}}
 @keyframes fadePanel{
   from{opacity:0;transform:translateY(10px);}
   to{opacity:1;transform:translateY(0);}
