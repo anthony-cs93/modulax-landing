@@ -605,17 +605,18 @@ header{
 }
 .plan-tag svg{flex:none;display:block;}
 .plan-name{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:6px;min-height:28px;}
-.plan-price{font-family:var(--font-mono);font-size:36px;font-weight:700;margin:16px 0 4px;line-height:1;min-height:70px;}
-.plan-price span{font-size:15px;font-weight:400;color:var(--ink-soft);}
+.plan-price{font-family:var(--font-mono);font-size:46px;font-weight:700;margin:16px 0 4px;line-height:1;min-height:78px;}
+.plan-price span{font-size:18px;font-weight:400;color:var(--ink-soft);}
+.plan-price--gratis{font-size:28px;}
 .precio-monto + .precio-periodo{margin-left:6px;}
 .precio-old{display:none;font-size:14px;font-weight:400;text-decoration:line-through;color:var(--ink-soft);opacity:.6;margin-bottom:4px;}
 .plan-card.featured .plan-price span{color:#B9A690;}
-.plan-desc{font-size:14.5px;color:var(--ink-soft);margin-bottom:22px;line-height:1.45;min-height:63px;}
+.plan-desc{font-family:var(--font-body);font-size:16px;color:var(--ink-soft);margin-bottom:22px;line-height:1.5;min-height:66px;}
 .plan-card.featured .plan-desc{color:#C8B9A6;}
 .precio-note{display:block;font-size:11px;font-weight:400;color:var(--ink-muted);margin-top:3px;white-space:nowrap;line-height:1.3;min-height:15px;opacity:.75;letter-spacing:.01em;}
 .plan-card.featured .precio-note{color:#8F7F6E;opacity:.7;}
 .plan-feats{margin:20px 0 28px;display:flex;flex-direction:column;gap:12px;flex-grow:1;}
-.plan-feats li{list-style:none;display:flex;gap:10px;font-size:14.5px;align-items:flex-start;line-height:1.4;}
+.plan-feats li{list-style:none;display:flex;gap:10px;font-family:var(--font-body);font-size:16px;align-items:flex-start;line-height:1.45;}
 .plan-feats li .ic{width:17px;height:17px;color:var(--green);flex:none;margin-top:2px;}
 
 /* ---------- TESTIMONIOS ---------- */
@@ -775,19 +776,17 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
         <a href="#planes" class="btn btn-primary">Empezar prueba gratis →</a>
         <a href="#demo-video-anchor" class="btn btn-outline">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          Ver video demo
+          Ver cómo funciona
         </a>
       </div>
 
       <div class="hero-badges">
         <div class="hero-chip"><span class="dot"></span> Sin tarjeta de crédito</div>
         <div class="hero-chip"><span class="dot"></span> Soporte por WhatsApp</div>
-        <div class="hero-chip"><span class="dot"></span> PDF con tu marca</div>
       </div>
 
       <div class="hero-proof">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span><strong>4.9/5</strong> — 30+ talleres en Lima y Arequipa ya cotizan con Modulax · <a href="#testimonios">Ver casos</a></span>
+        <span aria-label="Valoración: 4.9 de 5 estrellas"><span class="stars" aria-hidden="true">★★★★★</span><strong>4.9/5</strong> — 30+ talleres en Lima y Arequipa ya cotizan con Modulax · <a href="#testimonios">Ver casos</a></span>
       </div>
     </div>
 
@@ -1126,7 +1125,7 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
 </section>
 
 <!-- ============ 5. CARACTERÍSTICAS TÉCNICAS ============ -->
-<section class="section" id="caracteristicas">
+<section class="section" style="background:var(--cream-2)" id="caracteristicas">
   <div class="wrap center" style="max-width:780px;">
     <p class="eyebrow" style="justify-content:center;">Funcionalidades especializadas</p>
     <h2 class="headline">Todo lo que tu taller necesita en un solo software</h2>
@@ -1300,8 +1299,8 @@ footer{background:#0B0705;color:#85715B;padding:44px 0;font-size:14px;border-top
 
     <!-- PLAN DEMO -->
     <div class="plan-card reveal delay-200">
-      <div class="plan-name">Demo Gratuito</div>
-      <div class="plan-price">Gratis</div>
+      <div class="plan-name">Plan Demo</div>
+      <div class="plan-price plan-price--gratis">Gratis</div>
       <p class="plan-desc">Ideal para probar la herramienta y realizar tus primeras cotizaciones.</p>
       
       <ul class="plan-feats">
