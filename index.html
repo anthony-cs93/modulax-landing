@@ -383,6 +383,13 @@ header{
 .stat-box .lbl{
   font-size:13.5px;color:var(--ink-soft);font-weight:500;
 }
+@media(max-width:767px){
+  .stats-strip{padding:14px 0;}
+  .stats-grid{gap:10px;}
+  .stat-box{padding:4px 8px;}
+  .stat-box .num{font-size:22px;margin-bottom:3px;}
+  .stat-box .lbl{font-size:11.5px;}
+}
 
 /* ---------- PROBLEMA vs SOLUCIÓN (REDISTRIBUCIÓN) ---------- */
 .vs-grid{
@@ -502,6 +509,15 @@ header{
 .tab-feature-points{display:flex;flex-direction:column;gap:12px;}
 .point-row{display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:500;}
 .point-row svg{color:var(--green);flex:none;}
+@media(max-width:767px){
+  .tab-panel.active{gap:12px;}
+  .tab-visual-wrap{padding:8px;border-radius:12px;}
+  .tab-info-card{padding:16px 16px;border-radius:12px;}
+  .tab-info-card h3{font-size:18px;margin-bottom:8px;}
+  .tab-info-card p{font-size:14.5px;margin-bottom:12px;}
+  .tab-feature-points{gap:8px;}
+  .point-row{font-size:13.5px;}
+}
 
 /* ---------- CARACTERÍSTICAS (BENTO GRID) ---------- */
 .feat-grid{display:grid;gap:18px;margin-top:40px;}
@@ -672,6 +688,49 @@ img.avatar{object-fit:cover;}
 .test-name{font-size:15px;font-weight:700;}
 .test-role{font-size:13px;color:var(--ink-soft);}
 
+/* ---------- COMPACTACIÓN MOBILE (CARDS Y TÍTULOS) ---------- */
+@media(max-width:767px){
+  /* Títulos de sección */
+  h2.headline{font-size:26px;margin-bottom:12px;}
+  .vs-title{font-size:20px;margin-bottom:10px;}
+
+  /* Problema vs Solución */
+  .vs-grid{gap:14px;margin-top:28px;}
+  .vs-card{padding:20px 16px;border-radius:14px;}
+  .vs-badge{font-size:11px;padding:4px 10px;margin-bottom:12px;}
+  .vs-desc{font-size:14px;margin-bottom:16px;}
+  .vs-list{gap:10px;}
+  .vs-item{gap:10px;}
+  .vs-item .ic-status{width:18px;height:18px;font-size:10px;}
+  .vs-item p{font-size:14px;line-height:1.4;}
+  .vs-item p strong{font-size:14px;}
+
+  /* Funcionalidades especializadas */
+  .feat-grid{gap:12px;margin-top:24px;}
+  .feat-card{padding:16px 14px;border-radius:12px;}
+  .feat-header{gap:10px;margin-bottom:10px;}
+  .feat-card .ic-box{width:36px;height:36px;border-radius:8px;font-size:15px;}
+  .feat-card h3{font-size:16.5px;}
+  .feat-card p{font-size:13.5px;line-height:1.45;}
+
+  /* Resultados comprobados */
+  .ben-grid{gap:12px;margin-top:24px;}
+  .ben-card{padding:18px 16px;border-radius:12px;}
+  .ben-card .num{font-size:13px;margin-bottom:8px;}
+  .ben-card h3{font-size:16.5px;margin-bottom:6px;}
+  .ben-card p{font-size:13.5px;line-height:1.45;}
+
+  /* Talleres que confían en Modulax */
+  .test-grid{gap:14px;margin-top:24px;}
+  .test-card{padding:20px 18px;border-radius:14px;}
+  .stars{font-size:14px;margin-bottom:10px;}
+  .test-quote{font-size:14.5px;margin-bottom:14px;}
+  .test-person{gap:10px;}
+  .avatar{width:36px;height:36px;font-size:13px;}
+  .test-name{font-size:14px;}
+  .test-role{font-size:12px;}
+}
+
 /* ---------- FAQ ---------- */
 .faq-list{max-width:780px;margin:40px auto 0;display:flex;flex-direction:column;gap:10px;}
 .faq-item{
@@ -735,7 +794,8 @@ img.avatar{object-fit:cover;}
 
 @media(max-width:768px){
   .mobile-sticky-cta{display:flex;}
-  body{padding-bottom:60px;}
+  .cta-final{padding-bottom:40px;}
+  footer{padding-top:20px;padding-bottom:72px;}
 }
 
 /* ---------- FOOTER ---------- */
