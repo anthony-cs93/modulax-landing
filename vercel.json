@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "buildCommand": "",
-  "outputDirectory": ".",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://www.cotizadormulax.com/landing",
+      "permanent": true
+    }
   ]
 }
